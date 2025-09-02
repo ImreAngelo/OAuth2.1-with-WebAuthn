@@ -1,3 +1,18 @@
+<picture>
+  <source
+    width="100%"
+    srcset="./docs/img/banner-dark-1700x640.png"
+    media="(prefers-color-scheme: dark)"
+  />
+  <source
+    width="100%"
+    srcset="./docs/img/banner-light-1700x640.avif"
+    media="(prefers-color-scheme: light), (prefers-color-scheme: no-preference)"
+  />
+  <img width="250" src="./docs/content/public/banner-light-1700x640.avif" />
+</picture>
+
+
 <h1 align="center">OAuth 2.1 with WebAuthn</h1>
 
 <p align="center">
@@ -25,7 +40,7 @@ make x
 > For instance, `make vault` will build and restart the vault container.
 
 ## OAuth 2.1 Protocol
-[ ] Show sequence diagram of correct flow and explain
+- [ ] Show sequence diagram of correct flow and explain
 
 ### PKCE
-[ ] Explain 
+- [ ] Explain PKCE
