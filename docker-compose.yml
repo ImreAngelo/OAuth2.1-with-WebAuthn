@@ -1,0 +1,33 @@
+services:
+  # authorization:
+  #   image: 
+  # database:
+  vault:
+    image: hashicorp/vault:latest
+    container_name: vault
+    cap_add:
+      - IPC_LOCK
+    # volumes:
+    #   - vault_data:/vault/data
+    #   - ./services/vault/config:/vault/config
+    #   - ./services/vault/scripts/start.sh:/usr/bin/start.sh
+    # entrypoint: ["/usr/bin/start.sh", "/vault/config/vault.hcl"]
+    environment:
+      # HTTPS_PROXY: "https://vault.localhost"
+      # HTTP_PROXY: "https://vault.localhost"
+      VAULT_ADDR: "http://localhost:8200"
+      VAULT_UI: "true"
+    # env_file:
+    #   - ./services/vault/.env
+    ports:
+      - 8200:8200
+    # networks:
+    #   - secure
+    # depends_on:
+    #   - db
+    healthcheck:
+      test: ["CMD", "vault", "status"]
+      interval: 1s
+      timeout: 10s
+      retries: 5
+      start_period: 3s
