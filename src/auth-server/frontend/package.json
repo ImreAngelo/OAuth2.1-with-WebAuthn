@@ -1,0 +1,20 @@
+{
+  "name": "@authorization/backend",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "solid-js": "^1.9.8"
+  },
+  "devDependencies": {
+    "rollup-plugin-webpack-stats": "^2.1.4",
+    "typescript": "~5.8.3",
+    "vite": "^7.1.2",
+    "vite-plugin-solid": "^2.11.8"
+  }
+}
