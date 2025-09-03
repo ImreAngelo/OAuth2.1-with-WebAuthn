@@ -16,9 +16,6 @@ if (IS_PRODUCTION) {
 	// Serve statically generated frontend
 	const assetsPath = path.join(__dirname, PUBLIC_PATH);
 	app.use(express.static(assetsPath));
-	// app.get("/", (_req, res) => {
-	// 	res.sendFile(path.join(assetsPath, "index.html"));
-	// });
 } else {
 	(async () => { // Only load this dependency in dev mode
 		const { createProxyMiddleware } = await import("http-proxy-middleware");

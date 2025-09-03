@@ -1,18 +1,16 @@
 const { build } = require("esbuild");
 
-/** Production build */
-const isOptimizeFlag = process.argv.includes("--optimize");
-
 build({
 	entryPoints: ["src/index.ts"],
 	outfile: "../build/index.js",
 	bundle: true,
 	platform: "node",
+	target: "node24",
 	define: {
-		"process.env.NODE_ENV": '"production"' // JSON.stringify(process.env.NODE_ENV || "development")
+		"process.env.NODE_ENV": JSON.stringify(process.env.NODE_ENV || "production")
 	},
 	sourcemap: false,
 	minify: true
-}).then(() => {
-  	console.log("✅ Build succeeded");
-});
+})
+.then(() => console.log("✅ Build succeeded"))
+.catch((error) => console.log(`❌ Build failed: ${error}`))
