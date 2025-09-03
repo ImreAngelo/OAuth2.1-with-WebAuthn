@@ -44,3 +44,7 @@ make x
 
 ### PKCE
 - [ ] Explain PKCE
+
+
+## TODO
+- [ ] Clean up authorization server frontend/backend structure

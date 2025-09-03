@@ -1,0 +1,28 @@
+{
+  "name": "@authorization/backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "build",
+    "build": "node esbuild.config.js",
+    "dev": "concurrently \"node esbuild.config.js --watch\" \"nodemon dist/index.js\""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "packageManager": "pnpm@10.15.1",
+  "devDependencies": {
+    "@types/express": "^5.0.3",
+    "@types/node": "^24.3.0",
+    "concurrently": "^9.2.1",
+    "esbuild": "^0.25.9",
+    "nodemon": "^3.1.10",
+    "typescript": "^5.9.2",
+    "ws": "^8.18.3"
+  },
+  "dependencies": {
+    "express": "^5.1.0"
+  }
+}
