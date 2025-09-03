@@ -5,7 +5,7 @@ const isOptimizeFlag = process.argv.includes("--optimize");
 
 build({
 	entryPoints: ["src/index.ts"],
-	outfile: "build/index.js",
+	outfile: "../build/index.js",
 	bundle: true,
 	platform: "node",
 	define: {
