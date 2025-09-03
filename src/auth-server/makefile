@@ -8,4 +8,4 @@ build:
 
 # 
 dev: 
-	cd frontend && pnpm run dev
+	pnpm run dev

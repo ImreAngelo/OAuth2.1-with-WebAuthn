@@ -3,4 +3,10 @@ import solid from 'vite-plugin-solid'
 
 export default defineConfig({
   plugins: [solid()],
+  server: {
+		port: 5173
+	},
+	build: {
+		outDir: "build"
+	}
 })

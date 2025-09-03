@@ -17,6 +17,7 @@
     "@types/express": "^5.0.3",
     "@types/node": "^24.3.0",
     "esbuild": "^0.25.9",
+    "http-proxy-middleware": "^3.0.5",
     "tsx": "^4.20.5",
     "typescript": "^5.9.2",
     "ws": "^8.18.3"
