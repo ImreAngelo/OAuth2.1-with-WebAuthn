@@ -1,35 +1,67 @@
-import { createSignal } from 'solid-js'
-import solidLogo from './assets/solid.svg'
-import viteLogo from '/vite.svg'
+// import { createSignal } from 'solid-js'
+// import solidLogo from './assets/solid.svg'
+// import viteLogo from '/vite.svg'
 import './App.css'
 
 function App() {
-  const [count, setCount] = createSignal(0)
+	// const [count, setCount] = createSignal(0)
 
-  return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} class="logo" alt="Vite logo" />
-        </a>
-        <a href="https://solidjs.com" target="_blank">
-          <img src={solidLogo} class="logo solid" alt="Solid logo" />
-        </a>
-      </div>
-      <h1>Vite + Solid</h1>
-      <div class="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count()}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p class="read-the-docs">
-        Click on the Vite and Solid logos to learn more
-      </p>
-    </>
-  )
+	return (
+	<>
+		<div class='wrapper'>
+			<div class='plain'>
+				<form class='login-form'>
+					<h1>Velkommen</h1>
+					<p>Make an account or log in using webauthn</p>
+					<div>
+						<input
+							name='firstname'
+							type='text'
+							placeholder='First name'
+							required
+						/>
+						<input
+							name='lastname'
+							type='text'
+							placeholder='First name (optional)'
+						/>
+					</div>
+					<input
+						name='mail'
+						type='text'
+						placeholder='E-mail address (optional)'
+					/>
+					<div>
+						<input
+							name='tos'
+							type='checkbox'
+							required
+						/>
+						<label for='tos'>
+							<span>I agree to the</span>
+							<a href="https://example.com/">Terms & Conditions</a> 
+						</label>
+					</div>
+					<button>
+						Lag konto
+					</button>
+					<div>
+						or log in with
+					</div>
+					<button>
+						Passkey (WebAuthn)
+					</button>
+				</form>
+			</div>
+			<div class='background'>
+				<div class='slogan'>
+					<p>Slogan goes</p>
+					<p>here</p>
+				</div>
+			</div>
+		</div>
+	</>
+	)
 }
 
 export default App

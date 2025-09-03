@@ -1,9 +1,13 @@
 #root {
-  max-width: 1280px;
+  /* max-width: 1280px; */
   margin: 0 auto;
-  padding: 2rem;
+  padding: 3rem 0;
+  height: 100vh;
+  box-sizing: border-box;
   text-align: center;
 }
+
+/* 
 
 .logo {
   height: 6em;
@@ -24,4 +28,65 @@
 
 .read-the-docs {
   color: #888;
+} */
+
+.wrapper {
+	/* display: flex; */
+	display: grid;
+	grid-template-columns: repeat(13, 1fr);
+
+	box-sizing: border-box;
+	height: 100%;
+
+	margin: 0 auto;
+	width: 1920px;
+
+	background-color: #363738;
+	padding: 1rem;
+	border-radius: 0.6rem;
+}
+
+
+/* Left side */
+
+.plain {
+	grid-column: span 8;
+	/* flex-grow: 2; */
+	
+	margin: 0 auto;
+	max-width: 30rem;
+	text-align: center;
+	height: inherit;
+}
+
+.login-form {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	height: inherit;
+}
+
+
+/* Right side */
+
+.background {
+	background: url("./assets/pexels-elif-kaya.jpg") center/cover no-repeat;
+	grid-column: span 5;
+	/* flex-grow: 3; */
+
+	border-radius: 0.6rem;
+	box-sizing: border-box;
+
+	display: flex;
+	flex-direction: column-reverse;
+}
+
+.slogan {
+	padding-bottom: 3.2rem;
+	
+	font-size: 3rem;
+	font-weight: 600;
+
+	line-height: 1rem;
+	color: black;
 }
