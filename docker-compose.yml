@@ -9,7 +9,7 @@ services:
       - ./src/database/migrations:/migrations
       - db_data:/var/lib/mysql
     environment:
-      MYSQL_ROOT_PASSWORD: ${MARIADB_ROOT_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
     ports:
       - 3306:3306
     networks:
