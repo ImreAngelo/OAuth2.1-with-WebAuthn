@@ -1,14 +1,26 @@
 services:
-  # authorization:
+  # authorization: # Auth server
   #   image: 
-  # database:
+  database:
+    image: mariadb:12
+    attach: false # Hide logs
+    volumes:
+      - ./src/database/init:/docker-entrypoint-initdb.d
+      - ./src/database/migrations:/migrations
+      - db_data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MARIADB_ROOT_PASSWORD}
+    ports:
+      - 3306:3306
+    networks:
+      - database
   vault:
     image: hashicorp/vault:latest
     container_name: vault
     cap_add:
       - IPC_LOCK
-    # volumes:
-    #   - vault_data:/vault/data
+    volumes:
+      - vault_data:/vault/data
     #   - ./services/vault/config:/vault/config
     #   - ./services/vault/scripts/start.sh:/usr/bin/start.sh
     # entrypoint: ["/usr/bin/start.sh", "/vault/config/vault.hcl"]
@@ -23,11 +35,14 @@ services:
       - 8200:8200
     # networks:
     #   - secure
-    # depends_on:
-    #   - db
     healthcheck:
       test: ["CMD", "vault", "status"]
       interval: 1s
       timeout: 10s
       retries: 5
       start_period: 3s
+volumes:
+  db_data:
+  vault_data:
+networks:
+  database:
