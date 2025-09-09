@@ -1,5 +1,6 @@
 # Python
 .venv
+__pycache__
 
 # Build files
 build
@@ -32,5 +33,5 @@ lerna-debug.log*
 *.sw?
 
 
-# Environment
+# Secrets
 .env

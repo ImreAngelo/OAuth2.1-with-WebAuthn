@@ -1,6 +1,6 @@
 SERVICES := vault auth-server res-server
 
-.PHONY: all build dev $(SERVICES)
+.PHONY: all build dev $(SERVICES) client
 
 all: build
 
@@ -18,3 +18,11 @@ $(SERVICES):
 
 dev:
 	cd ./src/auth-server && pnpm run dev
+
+
+##########
+# CLIENT #
+##########
+
+client:
+	python3 ./src/client/python/main.py

@@ -1,0 +1,32 @@
+[build-system]
+requires = ["hatchling>=1.25"]
+build-backend = "hatchling.build"
+
+[project]
+name = "oauth-client"
+version = "0.1.1"
+description = "OAuth 2.1 third-party client"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "Imre Angelo", email = "imre@angelo.no" }]
+dependencies = [
+    "pyfiglet>=1.0.4",
+    "rich>=14.1.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8",
+]
+
+[project.scripts]
+oauth-client = "oauth_client.__main__:main"
+
+# Tell Hatch which package directory to include
+[tool.hatch.build.targets.wheel]
+packages = ["src/oauth_client"]
+
+# Include sources & README in sdists
+[tool.hatch.build.targets.sdist]
+include = ["src/oauth_client", "README.md", "pyproject.toml"] # , "tests"
