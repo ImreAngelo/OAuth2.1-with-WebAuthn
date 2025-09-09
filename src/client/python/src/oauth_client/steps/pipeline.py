@@ -7,9 +7,9 @@ from .pkce import generate_pkce_pair
 from .reroll import reroll_values
 import webbrowser
 
+
 AUTH_SERVER_URL = "https://auth.site.localhost/"
 CLIENT_ID = "my-client-id"
-REDIRECT_URI_LOCAL_ENDPOINT = "/callback"
 CALLBACK_PORT = 8080
 
 
@@ -30,9 +30,8 @@ def run() -> bool:
         if loop == None:
             return False
         
-    # TODO: Refactor and move into separate file(s)
-
     # Open OAuth login page
+    # TODO: Refactor and move into separate file(s)
     # TODO: Implement deep link flow
     print("\nStarting callback server...\n(Deep links are not implemented yet)\n")
     
