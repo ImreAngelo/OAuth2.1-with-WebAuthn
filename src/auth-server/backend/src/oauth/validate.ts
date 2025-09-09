@@ -23,15 +23,30 @@ export default function validate(req: Request, res: Response, next: NextFunction
     
     const data = result.data;
 
-    // TODO: If dev mode -> Set chalk as dev dependency?
+    // TODO: Global loglevels
     console.log(chalk.bold.yellow("OAuth Parameters"));
-    console.log(chalk.bold("Client ID: "), data.client_id);
-    console.log(chalk.bold("Redirect URI: "), data.redirect_uri);
-    console.log(chalk.bold("Challenge: "), data.code_challenge);
-    console.log(chalk.bold("PKCE Method: "), data.code_challenge_method);
+    paddedPrint([
+        ["Client ID:", data.client_id],
+        ["Redirect URI:", data.redirect_uri],
+        ["Challenge:", data.code_challenge],
+        ["PKCE Method:", data.code_challenge_method],
+    ]);
+
     console.log(chalk.green("✅ Valid OAuth parameters"));
 
     (req as any).oauthParams = data;
-
+    
+    // TODO: Save session for 5 minutes
     return next();
+}
+
+// TODO: Move to helpers
+function paddedPrint(entries: [string, string][]) {
+    // Find the longest label length
+    const maxLabelLength = Math.max(...entries.map(([label]) => label.length));
+
+    for (const [label, value] of entries) {
+        const paddedLabel = label.padEnd(maxLabelLength, " ");
+        console.log(chalk.bold(paddedLabel), value);
+    }
 }
