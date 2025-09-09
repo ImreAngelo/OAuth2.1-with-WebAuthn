@@ -8,7 +8,7 @@ from .reroll import reroll_values
 import webbrowser
 
 
-AUTH_SERVER_URL = "https://auth.site.localhost/login"
+AUTH_SERVER_URL = "https://auth.site.localhost/"
 CLIENT_ID = "my-client-id"
 CALLBACK_PORT = 8080
 

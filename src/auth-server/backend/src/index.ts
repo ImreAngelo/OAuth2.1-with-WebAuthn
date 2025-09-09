@@ -8,6 +8,9 @@ const IS_PRODUCTION = (process.env.NODE_ENV === "production");
 const PUBLIC_PATH = "./public";
 const PORT = process.env.PORT || 3000;
 
+// Keep routes defined in routes.ts for readability
+routes.register(app);
+
 /** 
  * Serve static site in production, and reverse proxy in development 
  * TODO: Maybe overkill for this scenario, just use SSR in prod and dev?
@@ -29,9 +32,6 @@ if (IS_PRODUCTION) {
 		);
 	})();
 }
-
-// Keep routes defined in routes.ts for readability
-routes.register(app);
 
 // Start listening
 app.listen(PORT, () => {

@@ -7,5 +7,5 @@ export function register(app: Express) {
         res.send("Hello World")
     })
 
-    app.use("/login", validate)
+    app.get("/", validate)
 }
