@@ -12,6 +12,7 @@ license = { text = "MIT" }
 authors = [{ name = "Imre Angelo", email = "imre@angelo.no" }]
 dependencies = [
     "pyfiglet>=1.0.4",
+    "InquirerPy>=0.3.4",
     "rich>=14.1.0",
 ]
 
