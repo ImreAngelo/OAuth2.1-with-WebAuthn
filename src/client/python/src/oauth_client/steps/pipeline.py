@@ -1,8 +1,17 @@
-from ..ui.clear_terminal import clear_terminal
 from ..ui.banner import show_banner
+from ..ui.clear_terminal import clear_terminal
 from ..ui.instructions import print_instructions
-from ..steps.reroll import reroll_values
+from .build_url import build_url
+from .listen import start_listener
 from .pkce import generate_pkce_pair
+from .reroll import reroll_values
+import webbrowser
+
+AUTH_SERVER_URL = "https://auth.site.localhost/"
+CLIENT_ID = "my-client-id"
+REDIRECT_URI_LOCAL_ENDPOINT = "/callback"
+CALLBACK_PORT = 8080
+
 
 def run() -> bool:
     loop = True
@@ -21,7 +30,23 @@ def run() -> bool:
         if loop == None:
             return False
         
+    # TODO: Refactor and move into separate file(s)
+
     # Open OAuth login page
+    # TODO: Implement deep link flow
+    print("\nStarting callback server...\n(Deep links are not implemented yet)\n")
+    
+    url = build_url(
+        AUTH_SERVER_URL,
+        client_id=CLIENT_ID,
+        challenge=pkce_challenge,
+        redirect_uri=f"http://localhost:{CALLBACK_PORT}/callback"
+    )
+
+    # TODO: Fix permission issues in WSL
+    webbrowser.open(url)
+
+    start_listener(CALLBACK_PORT)
 
     # TODO: Show when new tokens are loaded etc.
     # while True:
