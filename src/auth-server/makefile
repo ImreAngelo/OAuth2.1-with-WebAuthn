@@ -3,7 +3,7 @@ VERSION=latest
 
 .PHONY: all build dev
 
-all: build
+all: dev
 
 # Build frontend and backend and build image
 build: 

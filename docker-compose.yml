@@ -1,19 +1,24 @@
 services:
-  # authorization: # Auth server
-  #   image: 
-  database:
-    image: mariadb:12
-    attach: false # Hide logs
-    volumes:
-      - ./src/database/init:/docker-entrypoint-initdb.d
-      - ./src/database/migrations:/migrations
-      - db_data:/var/lib/mysql
-    environment:
-      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
-    ports:
-      - 3306:3306
+  authorization: # Auth server
+    build:
+      context: ./src/auth-server
+    expose:
+      - 3000 
     networks:
-      - database
+      - secure
+  # database:
+  #   image: mariadb:12
+  #   attach: false # Hide logs
+  #   volumes:
+  #     - ./src/database/init:/docker-entrypoint-initdb.d
+  #     - ./src/database/migrations:/migrations
+  #     - db_data:/var/lib/mysql
+  #   environment:
+  #     MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
+  #   ports:
+  #     - 3306:3306
+  #   networks:
+  #     - database
   vault:
     image: hashicorp/vault:latest
     container_name: vault
@@ -31,18 +36,30 @@ services:
       VAULT_UI: "true"
     # env_file:
     #   - ./services/vault/.env
-    ports:
-      - 8200:8200
-    # networks:
-    #   - secure
+    expose:
+      - 8200
+    networks:
+      - secure
     healthcheck:
       test: ["CMD", "vault", "status"]
       interval: 1s
       timeout: 10s
       retries: 5
       start_period: 3s
+  reverse-proxy:
+    image: iangelo/nginx:latest
+    container_name: nginx
+    ports:
+      - 80:80
+      - 443:443/tcp
+      - 443:443/udp
+    volumes:
+      - ./src/nginx/src/conf.d:/etc/nginx/conf.d
+    networks:
+      - secure
 volumes:
   db_data:
   vault_data:
 networks:
   database:
+  secure:
