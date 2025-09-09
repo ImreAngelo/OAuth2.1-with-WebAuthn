@@ -6,6 +6,8 @@ services:
       - 3000 
     networks:
       - secure
+    stdin_open: true
+    tty: true
   # database:
   #   image: mariadb:12
   #   attach: false # Hide logs

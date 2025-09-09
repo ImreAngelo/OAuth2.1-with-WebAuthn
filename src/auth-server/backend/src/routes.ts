@@ -1,8 +1,11 @@
 import { Express, Request, Response } from "express";
+import validate from "./oauth/validate";
 
 export function register(app: Express) {
     app.get("/test", (_req: Request, res: Response) => {
         console.log("Test route was accessed.")
         res.send("Hello World")
     })
+
+    app.use("/login", validate)
 }

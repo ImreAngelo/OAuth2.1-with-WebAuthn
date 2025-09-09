@@ -8,7 +8,7 @@ from .reroll import reroll_values
 import webbrowser
 
 
-AUTH_SERVER_URL = "https://auth.site.localhost/"
+AUTH_SERVER_URL = "https://auth.site.localhost/login"
 CLIENT_ID = "my-client-id"
 CALLBACK_PORT = 8080
 
@@ -46,6 +46,8 @@ def run() -> bool:
     webbrowser.open(url)
 
     start_listener(CALLBACK_PORT)
+
+    # TODO: Show loading animation
 
     # TODO: Show when new tokens are loaded etc.
     # while True:

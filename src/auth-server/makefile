@@ -3,7 +3,7 @@ VERSION=latest
 
 .PHONY: all build dev
 
-all: dev
+all: docker-up
 
 # Build frontend and backend and build image
 build: 
@@ -13,3 +13,6 @@ build:
 # TODO: Use makefile to use docker dev image and pnpm to use local dev in terminal
 dev: 
 	pnpm run dev
+
+docker-up:
+	docker compose -f '../../docker-compose.yml' up -d --build 'authorization'
