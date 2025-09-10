@@ -1,14 +1,16 @@
 import { NextFunction, Request, Response } from "express";
 import chalk from 'chalk';
-import Schema from "./Schema";
+import AuthorizationRequest, { Schema } from "./AuthorizationRequest";
+
+export type ValidatedRequest = Request & { oauth: AuthorizationRequest };
 
 /**
- * Verify OAuth URL parameters
- * @param req
- * @param res 
+ * Verify OAuth URL parameters before processing the request
+ * @param req Express request object
+ * @param res Express response object
+ * @param next Express next function
  */
 export default function validate(req: Request, res: Response, next: NextFunction) {
-    // the parsed result is validated and type safe!
     const result = Schema.safeParse(req.query);
 
     if(!result.success) {
@@ -22,31 +24,10 @@ export default function validate(req: Request, res: Response, next: NextFunction
     }
     
     const data = result.data;
+    (req as ValidatedRequest).oauth = data;
 
-    // TODO: Global loglevels
-    console.log(chalk.bold.yellow("OAuth Parameters"));
-    paddedPrint([
-        ["Client ID:", data.client_id],
-        ["Redirect URI:", data.redirect_uri],
-        ["Challenge:", data.code_challenge],
-        ["PKCE Method:", data.code_challenge_method],
-    ]);
-
+    // TODO: Global loglevels/proper audit and logging
     console.log(chalk.green("✅ Valid OAuth parameters"));
-
-    (req as any).oauthParams = data;
     
-    // TODO: Save session for 5 minutes
     return next();
-}
-
-// TODO: Move to helpers
-function paddedPrint(entries: [string, string][]) {
-    // Find the longest label length
-    const maxLabelLength = Math.max(...entries.map(([label]) => label.length));
-
-    for (const [label, value] of entries) {
-        const paddedLabel = label.padEnd(maxLabelLength, " ");
-        console.log(chalk.bold(paddedLabel), value);
-    }
 }

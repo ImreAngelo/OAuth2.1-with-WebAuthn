@@ -36,10 +36,11 @@ def run() -> bool:
     print("\nStarting callback server...\n(Deep links are not implemented yet)\n")
     
     url = build_url(
-        AUTH_SERVER_URL,
+        server_url=AUTH_SERVER_URL,
         client_id=CLIENT_ID,
         challenge=pkce_challenge,
-        redirect_uri=f"http://localhost:{CALLBACK_PORT}/callback"
+        redirect_uri=f"http://localhost:{CALLBACK_PORT}/callback",
+        # state=uuid
     )
 
     # TODO: Fix permission issues in WSL
