@@ -13,32 +13,50 @@ type Session = AuthorizationRequest & {
 }
 
 /**
- * 
+ * Save request
  * @param params 
  * @param maxTime 
  */
-export function makeSession(params: AuthorizationRequest, maxTime = 300000) {
+function makeSession(params: AuthorizationRequest, maxTime = 300000) {
     const id = randomUUID();
 
     sessions.set(id, {
         ...params, // Keep session alive for 5 minutes
-        timer: setTimeout(() => sessions.delete(id), maxTime)
+        timer: setTimeout(() => removeSession(id, true), maxTime)
     });
 
     console.log(chalk.bold.yellow("UUID: "), id)
     debugPrint(params);
+
+    return id;
 }
 
 /**
- * 
+ * Remove stored request
+ * @param id 
+ * @param timeout 
+ */
+function removeSession(id: UUID, timeout: boolean = false) {
+    if(timeout) console.error(chalk.red.bold(`Session '${id}' timed out`));
+    else console.log(chalk.green(`Session '${id}' was terminated`))
+    
+    sessions.delete(id);
+}
+
+/**
+ * Begin an OAuth session. Assumes "oauth" exists in request.
  * @param req 
  * @param res 
  * @param next 
  */
 export default function startSession(req: Request, res: Response, next: NextFunction) {
     const oauth = (req as ValidatedRequest).oauth;
-    
-    makeSession(oauth);
+    const sessionID = makeSession(oauth);
+
+    (req as any).sessionID = sessionID;
+    res.cookie('oauth_request_id', sessionID, {
+        maxAge: 300000, // Valid for 5 minutes
+    });
 
     return next();
 }

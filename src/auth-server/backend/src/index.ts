@@ -1,12 +1,16 @@
 import express, { Request, Response } from "express";
+import cookieParser from 'cookie-parser';
 import path from "path";
 import * as routes from "./routes";
-
-const app = express();
 
 const IS_PRODUCTION = (process.env.NODE_ENV === "production");
 const PUBLIC_PATH = "./public";
 const PORT = process.env.PORT || 3000;
+
+const app = express();
+
+// TODO: Use a secret key retrieved from vault
+app.use(cookieParser());
 
 // Keep routes defined in routes.ts for readability
 routes.register(app);
