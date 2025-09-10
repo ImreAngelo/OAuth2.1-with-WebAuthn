@@ -40,7 +40,7 @@ def run() -> bool:
         client_id=CLIENT_ID,
         challenge=pkce_challenge,
         redirect_uri=f"http://localhost:{CALLBACK_PORT}/callback",
-        # state=uuid
+        state="abcdef" # TODO: Use random or skip this
     )
 
     # TODO: Fix permission issues in WSL
