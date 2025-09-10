@@ -39,4 +39,6 @@ export default function startSession(req: Request, res: Response, next: NextFunc
     const oauth = (req as ValidatedRequest).oauth;
     
     makeSession(oauth);
+
+    return next();
 }
