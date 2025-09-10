@@ -52,9 +52,29 @@ Defined in <a href="https://datatracker.ietf.org/doc/html/draft-ietf-oauth-v2-1-
 
 <img align="center" src="./docs/diagrams/webauthn-login.svg" />
 
-### PKCE
-- [ ] Explain PKCE
+<!-- 
+title OAuth 2.1 + WebAuthn Login
 
+Client->Browser:GET /login?response_type=code
+space -4
+Browser->Auth:
+activate Auth
+Auth->Auth: (optional) SSR\nto include login\noptions/webauthn
+Auth->Auth: Save auth request\nparams identified by\na session ID
+Browser<-Auth: 200 OK, set-cookie: session ID
+deactivate Auth
+
+Browser->Auth:
+-->
+
+## WebAuthn
+*explanation*
+
+> [!TIP]
+> Since webauthn login options do not require any input, we can include them in the initial request by using server-side rendering to append them in a `script` tag. 
+>
+> This reduces the initial page load by a single round-trip, but means we cannot easily cache the site and the initial response should include a `Cache-Control: no-cache` header to prevent storing stale options.
 
 ## TODO
 - [ ] Clean up authorization server frontend/backend structure
+  - [ ] Use SSR to send WebAuthn login options with the  
