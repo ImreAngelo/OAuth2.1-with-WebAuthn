@@ -24,5 +24,6 @@ dev:
 # CLIENT #
 ##########
 
+# python3 ./src/client/python/main.py
 client:
-	python3 ./src/client/python/main.py
+	python3 -m oauth_client

@@ -77,4 +77,4 @@ Browser->Auth:
 
 ## TODO
 - [ ] Clean up authorization server frontend/backend structure
-  - [ ] Use SSR to send WebAuthn login options with the  
+  - [ ] Use SSR to send WebAuthn login options with the initial page load

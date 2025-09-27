@@ -1,16 +1,43 @@
 // import { createSignal } from 'solid-js'
 // import solidLogo from './assets/solid.svg'
 // import viteLogo from '/vite.svg'
+// import { createEffect } from 'solid-js';
+// import { useSubmission } from '@solidjs/router';
 import './App.css'
+import { register } from './webauthn/register';
+
+function getRegistrationOptions(e: SubmitEvent) {
+	e.preventDefault();
+	console.log("E: ", new FormData(e.target))
+
+	// const { form } = e.val;
+
+	// const formData = {
+    //     name: name(),
+    //     email: email(),
+	// };
+
+	const formData = {
+		
+	};
+
+	console.log("Form submitted with data:", formData);
+
+	// register()
+}
 
 function App() {
-	// const [count, setCount] = createSignal(0)
+	// const submission = useSubmission(submitRegistration);
+
+	// createEffect(() => {
+	// 	console.log("The count is now", count());
+	// }, []);
 
 	return (
 	<>
 		<div class='wrapper'>
 			<div class='plain'>
-				<form class='login-form'>
+				<form id='registration-form' class='login-form' onSubmit={getRegistrationOptions}>
 					<h1>Velkommen</h1>
 					<p>Make an account or log in using webauthn</p>
 					<div>
@@ -48,7 +75,7 @@ function App() {
 					<div>
 						or log in with
 					</div>
-					<button>
+					<button onClick={(e) => { e.preventDefault(); console.log("TODO: Login") }}>
 						Passkey (WebAuthn)
 					</button>
 				</form>
