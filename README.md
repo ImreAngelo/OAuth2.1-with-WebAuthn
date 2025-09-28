@@ -35,7 +35,7 @@
     srcset="./docs/img/banner-light-1700x600.avif"
     media="(prefers-color-scheme: light), (prefers-color-scheme: no-preference)"
   /> -->
-  <img width="250" src="./docs/img/login-light.png" />
+  <img width="100%" src="./docs/img/login-light.png" />
 </picture>
 
 > [!WARNING]
