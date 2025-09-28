@@ -60,3 +60,13 @@ export default function startSession(req: Request, res: Response, next: NextFunc
 
     return next();
 }
+
+/**
+ * 
+ * @param req 
+ * @param res 
+ * @param next 
+ */
+export function getSession(id: UUID) : Session | undefined {
+    return sessions.get(id);
+}

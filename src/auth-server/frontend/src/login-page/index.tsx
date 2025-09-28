@@ -2,8 +2,23 @@
 import { Title } from "@solidjs/meta";
 import style from './login.module.css';
 import FormStateA from './states/a';
+import { createEffect, createSignal } from "solid-js";
 
 export default function LoginPage() {
+    const [loginOptions, setLoginOptions] = createSignal({});
+
+    // TODO: Send login options with initial request -> check if stale
+    createEffect(() => {
+        fetch('/webauthn/login/options', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            // body: JSON.stringify({ state: state }),
+        })
+        .then(async r => setLoginOptions(await r.json()))
+    }, []);
+
+    createEffect(() => { console.log("Updated login options: ", loginOptions()) }, [loginOptions]);
+
     return (
         <>
         <>
