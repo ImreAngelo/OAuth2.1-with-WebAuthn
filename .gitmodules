@@ -1,0 +1,3 @@
+[submodule "deps/altinn-din"]
+	path = deps/altinn-din
+	url = https://github.com/Altinn/altinn-din
