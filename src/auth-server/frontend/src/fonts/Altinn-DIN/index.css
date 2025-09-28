@@ -1,0 +1,63 @@
+/* Regular */
+@font-face {
+	font-family: "Altinn DIN";
+	src: url("Altinn-DIN.woff2") format("woff2");
+	font-weight: 400;
+	font-style: normal;
+}
+
+/* Italic */
+@font-face {
+	font-family: "Altinn DIN";
+	src: url("Altinn-DIN-Italic.woff2") format("woff2");
+	font-weight: 400;
+	font-style: italic;
+}
+
+/* Bold */
+@font-face {
+	font-family: "Altinn DIN";
+	src: url("Altinn-DIN-Bold.woff2") format("woff2");
+	font-weight: 700;
+	font-style: normal;
+}
+
+/* Condensed Regular */
+@font-face {
+	font-family: "Altinn DIN Condensed";
+	src: url("Altinn-DINCondensed.woff2") format("woff2");
+	font-weight: 400;
+	font-style: normal;
+}
+
+/* Condensed Bold */
+@font-face {
+	font-family: "Altinn DIN Condensed";
+	src: url("Altinn-DINCondensed-Bold.woff2") format("woff2");
+	font-weight: 700;
+	font-style: normal;
+}
+
+/* Expanded Regular */
+@font-face {
+	font-family: "Altinn DIN Exp";
+	src: url("Altinn-DINExp.woff2") format("woff2");
+	font-weight: 400;
+	font-style: normal;
+}
+
+/* Expanded Italic */
+@font-face {
+	font-family: "Altinn DIN Exp";
+	src: url("Altinn-DINExp-Italic.woff2") format("woff2");
+	font-weight: 400;
+	font-style: italic;
+}
+
+/* Expanded Bold */
+@font-face {
+	font-family: "Altinn DIN Exp";
+	src: url("Altinn-DINExp-Bold.woff2") format("woff2");
+	font-weight: 700;
+	font-style: normal;
+}

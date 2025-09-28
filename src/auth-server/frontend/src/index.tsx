@@ -1,8 +1,20 @@
 /* @refresh reload */
 import { render } from 'solid-js/web'
+import { Route, Router } from '@solidjs/router';
+import LoginPage from './login-page/index.tsx';
+// import App from './App.tsx'
+import './Globals.d.ts'
 import './index.css'
-import App from './App.tsx'
+
 
 const root = document.getElementById('root')
 
-render(() => <App />, root!)
+render(
+    // root={App}>
+    () => (
+      <Router> 
+        <Route path="/authorize" component={LoginPage} />
+      </Router>
+    ),
+    root!
+);

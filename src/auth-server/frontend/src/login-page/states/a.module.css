@@ -1,0 +1,24 @@
+.login-form {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	height: inherit;
+
+    width: 25rem;
+    max-width: 25rem;
+    margin: 0 auto;
+}
+
+/* TODO: Global styles */
+h1 {
+    font-size: 1.75rem;
+}
+
+h2 {
+    font-size: 1.5rem;
+    margin: 0;
+}
+
+p {
+    margin-top: .5rem;
+}

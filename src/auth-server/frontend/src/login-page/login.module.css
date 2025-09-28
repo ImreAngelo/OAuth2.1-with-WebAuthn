@@ -1,0 +1,93 @@
+.wrapper {
+	display: grid;
+	grid-template-columns: repeat(2,minmax(0,1fr));
+	
+	max-width: 1920;
+	margin: 0 auto;
+	width: 100vw;
+
+	min-height: 100%;
+	height: 100vh;
+}
+
+
+/* Left side */
+.plain {
+	position: relative;
+	
+	box-sizing: border-box;
+	width: 100%;
+
+	margin: 0 auto;
+	padding: 6rem;
+	
+	/* Centering */
+	/* text-align: center; */
+	justify-content: center;
+	display: flex;
+	flex-direction: column;
+}
+
+.footer {
+	font-family: 'Altinn DIN Exp';
+	font-size: 1.01rem;
+	/* color: #848484; */
+
+	/* Position */
+	width: 100%;
+	position: absolute;
+	bottom: 1rem;
+	left: 0;
+
+	text-align: center;
+}
+
+
+/* Right side */
+.background {
+	margin: 1rem;
+
+	background: url("../assets/pexels-zakh.jpg") center/cover no-repeat;
+	/* grid-column: span 5; */
+	/* flex-grow: 3; */
+
+	border-radius: 0.6rem;
+	box-sizing: border-box;
+
+	display: flex;
+	flex-direction: column-reverse;
+}
+
+.slogan {
+	padding-bottom: 3.2rem;
+	
+	font-size: 3rem;
+	font-weight: 600;
+
+	line-height: 1rem;
+	color: black;
+}
+
+
+/* Logo  */
+/* 
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+.logo.solid:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+.card {
+  padding: 2em;
+}
+
+.read-the-docs {
+  color: #888;
+} */
