@@ -9,9 +9,123 @@
     margin: 0 auto;
 }
 
+/* Logo */
+.header {
+    display: flex;
+    gap: 0.65rem;
+}
+
+.logo {
+  height: 2.2rem;
+  /* padding: 1.5em; */
+  width: 3rem;
+  /* width: 4rem; */
+  height: 100%;
+  will-change: filter;
+  transition: filter 300ms;
+
+  background: url('../logo/noun-blank.svg') no-repeat center;
+  cursor: pointer;
+}
+.logo:hover {
+  filter: drop-shadow(0 0 0.4rem #db1212);
+}
+/* .logo.solid:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+} */
+
+
+
+/* Input */
+.fields {
+    margin-top: 1rem;
+}
+
+.input {
+    height: 3rem;
+    
+    box-sizing: border-box;
+    
+    border: 1px solid #d7d7d7;
+    background-color: #fff;
+    border-color: #848484;
+    border-radius: .375rem;
+    display: block;
+    font-size: 1rem;
+    line-height: 1.5rem;
+    outline-width: 0;
+
+    padding: 0 1rem;
+    /* padding: .75rem 1rem; */
+    transition-duration: .2s;
+    transition-property: color,background-color,border-color,text-decoration-color,fill,stroke,opacity,box-shadow,transform,filter,backdrop-filter,-webkit-backdrop-filter;
+    transition-timing-function: cubic-bezier(.4,0,.2,1);
+    width: 100%;
+
+    margin-top: 0.4rem;
+}
+
+/* Buttons */
+.btn {
+    display: flex;
+    gap: 0.4rem;
+    line-height: 1.5rem;
+    /* padding: 0; */
+}
+
+.btn-icon {
+    width: 2rem;
+    height: 1.5rem;
+    background-repeat: no-repeat;
+    background-position: center;
+    /* background-size: cover; */
+}
+
+button {
+    border-radius: .4rem;
+    border: 1px solid transparent;
+    padding: 0.6rem 1rem;
+    text-align: center;
+	font-family: inherit;
+    font-size: 1rem;
+    font-weight: 400;
+    cursor: pointer;
+
+    transition: background-color 350ms ease-out;
+}
+
+button:hover {
+    background: #db1212;
+}
+
+
+/* button {
+	border-radius: 8px;
+	border: 1px solid transparent;
+	padding: 0.6em 1.2em;
+	font-size: 1em;
+	font-weight: 500;
+	font-family: inherit;
+	cursor: pointer;
+	transition: border-color 0.25s;
+}
+button:hover {
+	border-color: #646cff;
+}
+button:focus,
+button:focus-visible {
+	outline: 4px auto -webkit-focus-ring-color;
+} */
+/* background-color: #1a1a1a; */
+/* background-color: ; */
+
+
+
+
 /* TODO: Global styles */
 h1 {
-    font-size: 1.75rem;
+    /* font-size: 1.75rem; */
+    font-size: 2.2rem;
 }
 
 h2 {
@@ -21,4 +135,6 @@ h2 {
 
 p {
     margin-top: .5rem;
+    font-weight: 400;
+    letter-spacing: -0.125px;
 }

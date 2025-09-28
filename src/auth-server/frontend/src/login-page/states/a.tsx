@@ -21,51 +21,73 @@ function getRegistrationOptions(e: SubmitEvent) {
     // register()
 }
 
-
 export default function FormStateA() {
     return (
         <form id='registration-form' class={style['login-form']} onSubmit={getRegistrationOptions}>
-            <div>
-                {/* Logo here */}
+            <div class={style.header}>
+                {/* TODO: Inline logo */}
+                <span class={style.logo}/>
                 <h1>Welcome to Blank</h1>
             </div>
             <h2>Sign in to your account</h2>
             <p class='muted'>
-                Make an account or log in using webauthn. Please enter your email address. 
-                If you've purchased our products before, use the same email to access 
-                your purchase history and pre-filled account details.
+                Make an account or log in using webauthn. 
+                After making an account, you will be given 
+                a set of backup keys and asked to 
+                configure a new webauthn key.
             </p>
-            <input
-                name='name'
-                type='text'
-                placeholder='Full name'
-                required
-            />
-            <input
-                name='mail'
-                type='text'
-                placeholder='E-mail address (optional)'
-            />
-            <div>
+            <div class={style.fields}>
                 <input
-                    name='tos'
-                    type='checkbox'
+                    name='name'
+                    type='text'
+                    placeholder='Full name'
                     required
+                    class={style.input}
                 />
-                <label for='tos'>
-                    <span>I agree to the</span>
-                    <a href="https://example.com/">Terms & Conditions</a> 
-                </label>
+                <input
+                    name='mail'
+                    type='text'
+                    placeholder='E-mail address'
+                    required
+                    class={style.input}
+                />
+                <div>
+                    <input
+                        name='tos'
+                        type='checkbox'
+                        required
+                    />
+                    <label for='tos'>
+                        <span>I agree to the</span>
+                        <a href="https://example.com/">Terms & Conditions</a> 
+                    </label>
+                </div>
             </div>
             <button>
-                Lag konto
+                Sign up
             </button>
             <div class='separator'>
-                or log in with
+                or sign in with
             </div>
-            <button onClick={(e) => { e.preventDefault(); console.log("TODO: Login") }}>
+            <LoginButton icon={fingerprint}>
                 Passkey (WebAuthn)
+            </LoginButton>
+            {/* <button class={style.btn} onClick={(e) => { e.preventDefault(); console.log("TODO: Login with webauthn") }}>
+                Passkey (WebAuthn)
+            </button> */}
+            <button class={style.btn} onClick={(e) => { e.preventDefault(); console.log("TODO: Login with keys") }}>
+                Backup Key
             </button>
         </form>
     )
 }
+
+import fingerprint from "./noun-fingerprint.svg";
+
+const LoginButton = ({ icon, children } : any) => (
+    <button class={style.btn}>
+        <div class={style['btn-icon']} style={{'background-image':`url(${icon})`}}/>
+        <div>{children}</div>
+    </button>
+)
+

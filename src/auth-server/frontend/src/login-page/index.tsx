@@ -1,9 +1,14 @@
-import { Route, Router } from '@solidjs/router';
+// import { Route, Router } from '@solidjs/router';
+import { Title } from "@solidjs/meta";
 import style from './login.module.css';
 import FormStateA from './states/a';
 
 export default function LoginPage() {
     return (
+        <>
+        <>
+            <Title>Sign in to Blank</Title>
+        </>
         <div class={style.wrapper}>
             <div class={style.plain}>
                 {/* <Router>
@@ -16,10 +21,11 @@ export default function LoginPage() {
             </div>
             <div class={style.background}>
                 <div class={style.slogan}>
-                    <p>Slogan goes</p>
-                    <p>here</p>
+                    State-of-the-art passwordless <br/>
+                    authentication and authorization
                 </div>
             </div>
         </div>
+        </>
     )
 }
