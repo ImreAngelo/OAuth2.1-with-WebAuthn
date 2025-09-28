@@ -11,13 +11,13 @@ import './index.css'
 const root = document.getElementById('root')
 
 render(
-    // root={App}>
-    () => (
-      <MetaProvider>
-        <Router> 
-          <Route path="/authorize" component={LoginPage} />
-        </Router>
-      </MetaProvider>
-    ),
-    root!
+		// root={App}>
+		() => (
+			<MetaProvider>
+				<Router> 
+					<Route path="/authorize" component={LoginPage} />
+				</Router>
+			</MetaProvider>
+		),
+		root!
 );

@@ -24,6 +24,20 @@
     <!-- ![example workflow](https://github.com/github/docs/actions/workflows/main.yml/badge.svg) -->
 </p>
 
+<picture>
+  <!-- <source
+    width="100%"
+    srcset="./docs/img/banner-dark-1700x600.avif"
+    media="(prefers-color-scheme: dark)"
+  /> -->
+  <!-- <source
+    width="100%"
+    srcset="./docs/img/banner-light-1700x600.avif"
+    media="(prefers-color-scheme: light), (prefers-color-scheme: no-preference)"
+  /> -->
+  <img width="250" src="./docs/img/login-light.png" />
+</picture>
+
 > [!WARNING]
 > **For testing WebAuthn:** Each WebAuthn registration will be stored on your computer unless manually removed. Having many registrations can slow down the speed of all using WebAuthn to log in. I recommend using <a href="https://developer.chrome.com/docs/devtools/webauthn">emulated authenticators</a> in Chrome DevTools to avoid clogging up your WebAuthn storage.  
 
