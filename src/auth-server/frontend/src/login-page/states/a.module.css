@@ -15,17 +15,21 @@
     gap: 0.65rem;
 }
 
-.logo {
-  height: 2.2rem;
-  /* padding: 1.5em; */
-  width: 3rem;
-  /* width: 4rem; */
-  height: 100%;
-  will-change: filter;
-  transition: filter 300ms;
+.header h1 {
+    line-height: 60px;
+}
 
-  background: url('../logo/noun-blank.svg') no-repeat center;
-  cursor: pointer;
+.logo {
+    height: 2.2rem;
+    /* padding: 1.5em; */
+    width: 3rem;
+    /* width: 4rem; */
+    height: 100%;
+    will-change: filter;
+    transition: filter 300ms;
+
+    /* background: url('../logo/noun-blank.svg') no-repeat center; */
+    cursor: pointer;
 }
 .logo:hover {
   filter: drop-shadow(0 0 0.4rem #db1212);
@@ -33,6 +37,25 @@
 /* .logo.solid:hover {
   filter: drop-shadow(0 0 2em #61dafbaa);
 } */
+
+
+@media (prefers-color-scheme: dark) {
+    .logo {
+        color: #fafafa;
+    }
+
+    button {
+        background-color: #867f88;
+    }
+
+    button:hover{
+        background-color: #471ac4 !important;
+    }
+
+    .input {
+        background-color: #bebebe !important;
+    }
+}
 
 
 
@@ -126,6 +149,7 @@ button:focus-visible {
 h1 {
     /* font-size: 1.75rem; */
     font-size: 2.2rem;
+    margin: 0;
 }
 
 h2 {

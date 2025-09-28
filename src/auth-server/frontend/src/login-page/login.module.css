@@ -3,7 +3,7 @@
 
 .wrapper {
 	display: grid;
-	grid-template-columns: repeat(2,minmax(0,1fr));
+	grid-template-columns: repeat(2, 1fr);
 	
 	max-width: 1920;
 	margin: 0 auto;
@@ -51,10 +51,11 @@
 	position: relative;
 	margin: 1rem;
 
-	background: url("../assets/pexels-sebastiaan.jpg") center/cover no-repeat;
-	background: url("../assets/pexels-fthdgrl.jpg") center/cover no-repeat;
-	background: url("../assets/pexels-nien-tran-dinh.jpg") center/cover no-repeat;
-	background: url("../assets/pexels-kenzero.jpg") center/cover no-repeat;
+	background: center/cover no-repeat;
+	background-image: url("../assets/pexels-sebastiaan.jpg");
+	background-image: url("../assets/pexels-fthdgrl.jpg");
+	background-image: url("../assets/pexels-nien-tran-dinh.jpg");
+	background-image: url("../assets/pexels-kenzero.jpg");
 	/* grid-column: span 5; */
 	/* flex-grow: 3; */
 
@@ -99,4 +100,15 @@
 	position: absolute;
 
 	border-radius: inherit;
+}
+
+
+
+
+@media (prefers-color-scheme: dark) {
+	.background {
+		background-image: url("../assets/pexels-nien-tran-dinh.jpg");
+	}
+
+
 }

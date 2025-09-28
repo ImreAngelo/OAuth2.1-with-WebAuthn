@@ -25,16 +25,16 @@
 </p>
 
 <picture>
-  <!-- <source
+  <source
     width="100%"
-    srcset="./docs/img/banner-dark-1700x600.avif"
+    srcset="./docs/img/login-dark-1440p.png"
     media="(prefers-color-scheme: dark)"
-  /> -->
-  <!-- <source
+  />
+  <source
     width="100%"
-    srcset="./docs/img/banner-light-1700x600.avif"
+    srcset="./docs/img/login-light.png"
     media="(prefers-color-scheme: light), (prefers-color-scheme: no-preference)"
-  /> -->
+  />
   <img width="100%" src="./docs/img/login-light.png" />
 </picture>
 
