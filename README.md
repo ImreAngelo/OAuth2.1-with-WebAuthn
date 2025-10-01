@@ -68,6 +68,19 @@ Defined in <a href="https://datatracker.ietf.org/doc/html/draft-ietf-oauth-v2-1-
 
 <img align="center" src="./docs/diagrams/oauth-simplified-flow.svg" />
 
+<picture>
+  <source
+    width="100%"
+    srcset="./docs/diagrams/oauth-simplified-dark.svg"
+    media="(prefers-color-scheme: dark)"
+  />
+  <source
+    width="100%"
+    srcset="./docs/diagrams/oauth-simplified-light.svg"
+    media="(prefers-color-scheme: light), (prefers-color-scheme: no-preference)"
+  />
+  <img width="100%" src="./docs/diagrams/oauth-simplified-light.svg" />
+</picture>
 
 ## WebAuthn
 *explanation*
