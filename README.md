@@ -66,20 +66,18 @@ make x
 ## OAuth 2.1 Protocol
 Defined in <a href="https://datatracker.ietf.org/doc/html/draft-ietf-oauth-v2-1-13">an active RFC draft</a>, OAuth 2.1 aims to simplify and unifi the many protocols part of the previous OAuth 2.0 standard (various requests for comment, including <a href="https://datatracker.ietf.org/doc/html/rfc6749">RFC6749</a>)
 
-<img align="center" src="./docs/diagrams/oauth-simplified-flow.svg" />
-
 <picture>
   <source
     width="100%"
-    srcset="./docs/diagrams/oauth-simplified-dark.svg"
+    srcset="./docs/diagrams/oauth-flow-dark.svg"
     media="(prefers-color-scheme: dark)"
   />
   <source
     width="100%"
-    srcset="./docs/diagrams/oauth-simplified-light.svg"
+    srcset="./docs/diagrams/oauth-flow-light.svg"
     media="(prefers-color-scheme: light), (prefers-color-scheme: no-preference)"
   />
-  <img width="100%" src="./docs/diagrams/oauth-simplified-light.svg" />
+  <img width="100%" src="./docs/diagrams/oauth-flow-light.svg" />
 </picture>
 
 ## WebAuthn
