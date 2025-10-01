@@ -66,24 +66,8 @@ make x
 ## OAuth 2.1 Protocol
 Defined in <a href="https://datatracker.ietf.org/doc/html/draft-ietf-oauth-v2-1-13">an active RFC draft</a>, OAuth 2.1 aims to simplify and unifi the many protocols part of the previous OAuth 2.0 standard (various requests for comment, including <a href="https://datatracker.ietf.org/doc/html/rfc6749">RFC6749</a>)
 
-- [ ] Show sequence diagram of correct flow and explain (this one is old and incorrectly labeled)
+<img align="center" src="./docs/diagrams/oauth-simplified-flow.svg" />
 
-<img align="center" src="./docs/diagrams/webauthn-login.svg" />
-
-<!-- 
-title OAuth 2.1 + WebAuthn Login
-
-Client->Browser:GET /login?response_type=code
-space -4
-Browser->Auth:
-activate Auth
-Auth->Auth: (optional) SSR\nto include login\noptions/webauthn
-Auth->Auth: Save auth request\nparams identified by\na session ID
-Browser<-Auth: 200 OK, set-cookie: session ID
-deactivate Auth
-
-Browser->Auth:
--->
 
 ## WebAuthn
 *explanation*
