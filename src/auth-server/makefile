@@ -1,7 +1,7 @@
 NAME=oauth-2.1/authorization-server
 VERSION=latest
 
-.PHONY: all build dev
+.PHONY: all build dev install test
 
 all: docker-up
 
@@ -16,3 +16,15 @@ dev:
 
 docker-up:
 	docker compose -f '../../docker-compose.yml' up -d --build 'authorization'
+
+
+#########
+# CI/CD #
+#########
+
+install:
+	cd backend && pnpm install --frozen-lockfile
+
+test:
+	cd backend && pnpm test
+	cd backend && pnpm test:coverage

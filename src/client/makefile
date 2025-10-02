@@ -6,7 +6,7 @@ ACTIVATE=$(VENV)/bin/activate
 
 bootstrap:
 	@test -d $(VENV) || $(PY) -m venv $(VENV)
-	. $(ACTIVATE) && python -m pip install --upgrade pip && pip install -e ".[dev]"
+	. $(ACTIVATE) && python -m pip install --upgrade pip && pip install ./python
 
 test:
 	. $(ACTIVATE) && pytest
