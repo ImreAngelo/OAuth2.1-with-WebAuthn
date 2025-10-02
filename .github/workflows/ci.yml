@@ -16,21 +16,21 @@ jobs:
     steps:
       - uses: actions/checkout@v5
 
-      - name:   
+      - name: 🚀 Set up PNPM
         uses: pnpm/action-setup@v4
         with:
           version: 10
       
-      - name: 🔨 Installing dependencies
+      - name: 🔨 Install dependencies
         run: make install
 
-      - name: Create badges branch
-        run: git checkout -b badges
+      # - name: Create badges branch
+      #   run: git checkout -b badges
 
-      - name: 🔍 Running tests
+      - name: 🔍 Run tests
         run: make test
 
-      - name: ⚙️ Generating coverage badges
+      - name: ⚙️ Generate coverage badges
         uses: jpb06/coverage-badges-action@latest
         with:
           target-branch: badges
