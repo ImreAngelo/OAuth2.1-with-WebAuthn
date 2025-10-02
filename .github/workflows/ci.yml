@@ -7,10 +7,8 @@ on:
 
 jobs:
   test:
-    name: Test Backend Coverage
+    name: Test backend
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
     steps:
       - uses: actions/checkout@v5
 
@@ -22,11 +20,11 @@ jobs:
       - name: 🔨 Installing dependencies
         run: make install
 
-      # - name: Delete 'badges' branch
-      #   run: git push origin --delete badges
+      - name: Delete 'badges' branch
+        run: git push origin --delete badges
 
-      # - name: Create badges branch
-      #   run: git checkout -b badges
+      - name: Create badges branch
+        run: git checkout -b badges
 
       - name: 🔍 Running tests
         run: make test
@@ -34,10 +32,9 @@ jobs:
       - name: ⚙️ Generating coverage badges
         uses: jpb06/coverage-badges-action@latest
         with:
-          branches: '*'
-          target-branch: badges
+          # target-branch: badges
           coverage-summary-path: |
             ./src/auth-server/**/coverage/coverage-summary.json
             
-      # - name: ⬆️ Push badges branch
-      #   run: git push origin badges
+      - name: ⬆️ Push badges
+        run: git push origin badges
