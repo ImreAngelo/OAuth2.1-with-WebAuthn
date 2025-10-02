@@ -34,7 +34,7 @@ client:
 #########
 
 install:
-	cd ./src/auth-server/backend && pnpm install
+	cd ./src/auth-server/backend && pnpm install --frozen-lockfile
 
 test:
 	cd ./src/auth-server/backend && pnpm test
