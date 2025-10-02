@@ -1,21 +1,12 @@
 {
   "compilerOptions": {
-    "module": "NodeNext",
-    "moduleResolution": "NodeNext",
-    "target": "ES2022",
-    "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
+    "target": "ES2024",
+    "module": "ESNext",
+    "moduleResolution": "Node",
     "strict": true,
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-    "noEmit": true
-    // "target": "ES2024",
-    // "module": "ESNext",
-    // "moduleResolution": "Node",
-    // "strict": true,
-    // "esModuleInterop": true,
-    // "outDir": "dist",
-    // "skipLibCheck": true
+    "esModuleInterop": true,
+    "outDir": "dist",
+    "skipLibCheck": true
   },
   "include": ["src"]
 }
