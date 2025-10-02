@@ -8,7 +8,9 @@ from .reroll import reroll_values
 import webbrowser
 
 
-AUTH_SERVER_URL = "https://auth.site.localhost/"
+# todo: accept arguments like http://localhost:3000/authorize for dev
+#       or select option via CLI/GUI
+AUTH_SERVER_URL = "https://auth.site.localhost/authorize" 
 CLIENT_ID = "my-client-id"
 CALLBACK_PORT = 8080
 
