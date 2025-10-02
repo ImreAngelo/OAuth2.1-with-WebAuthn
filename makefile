@@ -1,6 +1,6 @@
 SERVICES := vault auth-server res-server
 
-.PHONY: all build dev $(SERVICES) client test
+.PHONY: all build dev $(SERVICES) client test install
 
 all: build
 
@@ -33,5 +33,9 @@ client:
 # CI/CD #
 #########
 
+install:
+	cd ./src/auth-server/backedn && pnpm install
+
 test:
 	cd ./src/auth-server/backend && pnpm test
+	cd ./src/auth-server/backend && pnpm test:coverage
