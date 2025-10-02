@@ -21,7 +21,7 @@
 
 <p align="center">
     <img alt="Unilicense" src="https://img.shields.io/github/license/ImreAngelo/OAuth2.1-with-WebAuthn">
-    <img alt="Build Status" src="https://github.com/github/docs/actions/workflows/ci.yml/badge.svg">
+    <img alt="Build Status" src="https://github.com/ImreAngelo/OAuth2.1-with-WebAuthn/actions/workflows/ci.yml/badge.svg">
 </p>
 
 <br/>
