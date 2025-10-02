@@ -34,7 +34,7 @@ client:
 #########
 
 install:
-	cd ./src/auth-server/backedn && pnpm install
+	cd ./src/auth-server/backend && pnpm install
 
 test:
 	cd ./src/auth-server/backend && pnpm test
