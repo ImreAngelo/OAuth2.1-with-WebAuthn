@@ -20,8 +20,9 @@
 </p>
 
 <p align="center">
-    <img alt="Unilicense" src="https://img.shields.io/github/license/ImreAngelo/OAuth2.1-with-WebAuthn">
     <img alt="Build Status" src="https://github.com/ImreAngelo/OAuth2.1-with-WebAuthn/actions/workflows/ci.yml/badge.svg">
+    <img alt="Coverage" src="https://github.com/ImreAngelo/OAuth2.1-with-WebAuthn/blob/badges/docs/badges/backend/coverage-total.svg">
+    <img alt="License" src="https://img.shields.io/github/license/ImreAngelo/OAuth2.1-with-WebAuthn">
 </p>
 
 <br/>
