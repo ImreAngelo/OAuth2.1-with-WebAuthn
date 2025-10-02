@@ -1,6 +1,6 @@
 SERVICES := vault auth-server res-server
 
-.PHONY: all build dev $(SERVICES) client
+.PHONY: all build dev $(SERVICES) client test
 
 all: build
 
@@ -27,3 +27,11 @@ dev:
 # python3 ./src/client/python/main.py
 client:
 	python3 -m oauth_client
+
+	
+#########
+# CI/CD #
+#########
+
+test:
+	cd ./src/auth-server/backend && pnpm test

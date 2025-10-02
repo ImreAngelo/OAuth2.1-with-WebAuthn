@@ -7,14 +7,13 @@ import getLoginOptions from "./webauthn/getLoginOptions";
 
 export function register(app: Express) {
     app.get("/test", (_req: Request, res: Response) => {
-        console.log("Test route was accessed.")
+        console.log("Test route was accessed")
         res.send("Hello World")
     })
 
+    // OAuth 2.1
     app.get("/authorize", [validate, startSession])
 
-    // TODO: Send WebAuthn login options early to avoid 1 extra round-trip
-    // app.get("/", sendLoginZeroRTT)
-
+    // WebAuthn
     app.post("/webauthn/login/options", [linkState, getLoginOptions])
 }
