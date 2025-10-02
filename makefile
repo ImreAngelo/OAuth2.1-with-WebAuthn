@@ -30,8 +30,9 @@ client:
 		python3 -m venv .venv; \
 		echo "Installing dependencies from pyproject.toml..."; \
 		make bootstrap -C ./src/client; \
+	else \
+		make update -C ./src/client; \
 	fi
-	pip install ./src/client/python
 	. .venv/bin/activate && python3 -m oauth_client
 	
 

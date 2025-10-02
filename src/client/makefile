@@ -8,6 +8,9 @@ bootstrap:
 	@test -d $(VENV) || $(PY) -m venv $(VENV)
 	. $(ACTIVATE) && python -m pip install --upgrade pip && pip install ./python
 
+update:
+	. $(ACTIVATE) && pip install ./python
+
 test:
 	. $(ACTIVATE) && pytest
 
