@@ -20,18 +20,14 @@ jobs:
       - name: 🔨 Installing dependencies
         run: make install
 
+      # - name: Delete 'badges' branch
+      #   run: git push origin --delete badges
+
+      - name: Create badges branch
+        run: git checkout -b badges
+
       - name: 🔍 Running tests
         run: make test
-        
-      - name: Ensure badges branch exists
-        run: |
-          if ! git ls-remote --exit-code origin badges; then
-            git checkout --orphan badges
-            git reset --hard
-            git commit --allow-empty -m "init badges branch"
-            git push origin badges
-            git checkout main
-          fi
 
       - name: ⚙️ Generating coverage badges
         uses: jpb06/coverage-badges-action@latest
@@ -40,3 +36,6 @@ jobs:
           output-folder: ./docs/badges
           coverage-summary-path: |
             ./src/auth-server/**/coverage/coverage-summary.json
+            
+      # - name: ⬆️ Push badges
+      #   run: git push origin badges
