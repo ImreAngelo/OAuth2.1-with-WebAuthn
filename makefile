@@ -1,4 +1,4 @@
-SERVICES := vault auth-server nginx res-server
+SERVICES := auth-server database nginx vault
 
 .PHONY: all build dev $(SERVICES) client test install
 
