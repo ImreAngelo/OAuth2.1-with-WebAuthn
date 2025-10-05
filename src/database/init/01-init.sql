@@ -3,12 +3,12 @@ USE authn;
 
 -- Create Tables
 CREATE TABLE IF NOT EXISTS Users (
-    `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+    `id` int(10) unsigned NOT NULL AUTO_INCREMENT PRIMARY KEY,
     `name` varchar(255) NOT NULL,
     `mail` varchar(255) NOT NULL,
-    `dek` varchar(96) NOT NULL COMMENT 'Data encryption key, must be encrypted by the appropriate KEK',
+    `dek` char(96) NOT NULL COMMENT 'Data encryption key, must be encrypted by the appropriate KEK',
     `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-    `mail_hash` varchar(64) NOT NULL,
+    `mail_hash` binary(32) NOT NULL UNIQUE /* SHA256 raw binary digest of mail used to check uniqueness */
 );
 
 CREATE TABLE IF NOT EXISTS Passkeys (
@@ -29,14 +29,3 @@ CREATE TABLE IF NOT EXISTS Passkeys (
     KEY Passkeys_Users_FK (user),
     CONSTRAINT Passkeys_Users_FK FOREIGN KEY (user) REFERENCES Users (id) ON DELETE CASCADE ON UPDATE CASCADE
 );
-
-
--- Create Users
--- TODO: Get password from environment
-CREATE USER IF NOT EXISTS 'auth'@'%' IDENTIFIED BY 'authpass';
-GRANT EXECUTE ON authn.* TO 'auth'@'%';
-
--- TODO: Use stored procedures for all dangerous operations like delete
-GRANT SELECT, INSERT ON authn.Users TO 'auth'@'%';
-GRANT SELECT, INSERT ON authn.Passkeys TO 'auth'@'%';
-GRANT SELECT, INSERT, UPDATE, DELETE ON authn.UserRoles TO 'auth'@'%';

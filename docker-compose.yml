@@ -10,13 +10,14 @@ services:
     tty: true
   database:
     image: mariadb:12
-    attach: false # Hide logs
+    # attach: false # Hide logs
     volumes:
       - ./src/database/init:/docker-entrypoint-initdb.d
       - ./src/database/migrations:/migrations
       - db_data:/var/lib/mysql
     environment:
       MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
+      AUTH_PASSWORD: ${DB_AUTH_PASSWORD}
     ports:
       - 3306:3306
     networks:
