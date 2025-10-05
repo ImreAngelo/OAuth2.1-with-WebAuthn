@@ -8,4 +8,11 @@ export default defineConfig({
 			include: ['src/**'],
 		},
 	},
+	resolve: {
+		alias: {
+			"@database": "/src/database",
+			"@oauth": "/src/oauth",
+			"@webauthn": "/src/webauthn",
+		},
+	},
 });
