@@ -1,18 +1,12 @@
 // Public functions
-export * from "./login/options";
-export * from "./register/options";
+import * as register from "./register";
+import * as login from "./login";
+export { register, login  };
 
 // More readable format
-import * as loginOptions from "./login/options";
-import * as registerOptions from "./register/options";
-
 export const WebAuthn = {
-    login: {
-        getOptions: loginOptions.getLoginOptions,
-    },
-    register: {
-        getOptions: registerOptions.getRegistrationOptions,
-    },
+    register: register.default,
+    login: login.default
 };
 
 export default WebAuthn;

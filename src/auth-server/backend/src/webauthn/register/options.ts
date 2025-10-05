@@ -1,4 +1,3 @@
-// /webauthn/login/get-options
 import { generateAuthenticationOptions } from '@simplewebauthn/server';
 import { NextFunction, Request, Response } from "express";
 import { ValidatedRequest } from "@oauth/validate";
@@ -10,7 +9,7 @@ export async function getRegistrationOptions(req: Request, res: Response, next: 
 /**
  * Send WebAuthn authentication options
  */
-export default async function getRegistrationOptions(req: ValidatedRequest | Request, res: Response, next: NextFunction) {
+export async function getRegistrationOptions(req: ValidatedRequest | Request, res: Response, next: NextFunction) {
     const request = req as ValidatedRequest;
     const { state } = request.oauth;
     

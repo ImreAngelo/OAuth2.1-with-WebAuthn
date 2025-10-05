@@ -16,7 +16,7 @@ build({
 		"@": "./src/",
 	},
 	sourcemap: false,
-	minify: true,
+	minify: false,
 	metafile: isAnalyzeFlagSet,
 	// plugins: [
 	// 	esbuildPluginAnalyzer({

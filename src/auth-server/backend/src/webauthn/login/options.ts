@@ -10,7 +10,7 @@ export async function getLoginOptions(req: Request, res: Response, next: NextFun
 /**
  * Send WebAuthn authentication options
  */
-export default async function getLoginOptions(req: ValidatedRequest | Request, res: Response, next: NextFunction) {
+export async function getLoginOptions(req: ValidatedRequest | Request, res: Response, next: NextFunction) {
     const request = req as ValidatedRequest;
     const { state } = request.oauth;
     
