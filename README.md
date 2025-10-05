@@ -91,4 +91,6 @@ Defined in <a href="https://datatracker.ietf.org/doc/html/draft-ietf-oauth-v2-1-
 
 ## TODO
 - [ ] Clean up authorization server frontend/backend structure
-  - [ ] Use SSR to send WebAuthn login options with the initial page load
+- [ ] Move services into their own repositories and use submodules
+- [ ] Use docker secrets instead of environment
+- [ ] Enable mTLS between services
