@@ -49,7 +49,7 @@ function removeSession(id: UUID, timeout: boolean = false) {
  * @param res 
  * @param next 
  */
-export default function startSession(req: Request, res: Response, next: NextFunction) {
+export function startSession(req: Request, res: Response, next: NextFunction) {
     const oauth = (req as ValidatedRequest).oauth;
     const sessionID = makeSession(oauth);
 

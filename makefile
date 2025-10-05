@@ -1,4 +1,4 @@
-SERVICES := vault auth-server res-server
+SERVICES := auth-server database nginx vault
 
 .PHONY: all build dev $(SERVICES) client test install
 
@@ -17,25 +17,31 @@ $(SERVICES):
 	$(MAKE) -C src/$@
 
 dev:
-	cd ./src/auth-server && pnpm run dev
+	make dev -C ./src/auth-server
 
 
 ##########
 # CLIENT #
 ##########
 
-# python3 ./src/client/python/main.py
 client:
-	python3 -m oauth_client
-
+	@if [ ! -d ".venv" ]; then \
+		echo "Creating virtual environment..."; \
+		python3 -m venv .venv; \
+		echo "Installing dependencies from pyproject.toml..."; \
+		make bootstrap -C ./src/client; \
+	else \
+		make update -C ./src/client; \
+	fi
+	. .venv/bin/activate && python3 -m oauth_client
 	
+
 #########
 # CI/CD #
 #########
 
 install:
-	cd ./src/auth-server/backend && pnpm install --frozen-lockfile
+	make install -C ./src/auth-server
 
 test:
-	cd ./src/auth-server/backend && pnpm test
-	cd ./src/auth-server/backend && pnpm test:coverage
+	make test -C ./src/auth-server

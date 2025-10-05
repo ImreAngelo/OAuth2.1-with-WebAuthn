@@ -1,9 +1,9 @@
-import { register } from '../../webauthn/register';
+// import { register } from '../../webauthn/register';
 import style from './a.module.css';
 
 function getRegistrationOptions(e: SubmitEvent) {
     e.preventDefault();
-    console.log("E: ", new FormData(e.target))
+    // console.log("E: ", new FormData(e.target))
 
     // const { form } = e.val;
 

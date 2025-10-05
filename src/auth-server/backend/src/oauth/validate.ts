@@ -10,7 +10,7 @@ export type ValidatedRequest = Request & { oauth: AuthorizationRequest };
  * @param res Express response object
  * @param next Express next function
  */
-export default function validate(req: Request, res: Response, next: NextFunction) {
+export function validate(req: Request, res: Response, next: NextFunction) {
     const result = Schema.safeParse(req.query);
 
     if(!result.success) {

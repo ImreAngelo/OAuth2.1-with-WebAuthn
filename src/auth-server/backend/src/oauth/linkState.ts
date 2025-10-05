@@ -11,7 +11,7 @@ import { getSession } from "./session";
  * @param res Express response object
  * @param next Express next function
  */
-export default function linkState(req: Request, res: Response, next: NextFunction) {
+export function linkState(req: Request, res: Response, next: NextFunction) {
     const { cookies } = req;
     const id : UUID = cookies.oauth_request_id; 
     const session = getSession(id);

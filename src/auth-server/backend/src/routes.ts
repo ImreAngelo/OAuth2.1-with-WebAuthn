@@ -1,9 +1,6 @@
 import { Express, Request, Response } from "express";
-import validate from "./oauth/validate";
-import startSession from "./oauth/session";
-import linkState from "./oauth/linkState";
-import getLoginOptions from "./webauthn/getLoginOptions";
-// import sendLoginZeroRTT from "./webauthn/sendLoginZeroRTT";
+import WebAuthn from "@webauthn";
+import OAuth from "@oauth";
 
 export function register(app: Express) {
     app.get("/test", (_req: Request, res: Response) => {
@@ -12,8 +9,9 @@ export function register(app: Express) {
     })
 
     // OAuth 2.1
-    app.get("/authorize", [validate, startSession])
+    app.get("/authorize", [OAuth.validate, OAuth.session.start])
 
     // WebAuthn
-    app.post("/webauthn/login/options", [linkState, getLoginOptions])
+    app.post("/webauthn/register/options", [OAuth.session.link, WebAuthn.register.getOptions])
+    app.post("/webauthn/login/options", [OAuth.session.link, WebAuthn.login.getOptions])
 }
