@@ -6,7 +6,11 @@
     "strict": true,
     "esModuleInterop": true,
     "outDir": "dist",
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "baseUrl": "src", // base folder for resolving non-relative imports
+    "paths": {
+      "@*": ["*"]
+    }
   },
   "include": ["src"]
 }

@@ -5,6 +5,7 @@ export default defineConfig({
 		environment: "node",
 		coverage: {
 			reporter: ['json-summary', 'text'],
+			include: ['src/**'],
 		},
 	},
 });

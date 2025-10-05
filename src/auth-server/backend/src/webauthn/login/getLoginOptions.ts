@@ -1,8 +1,8 @@
 // /webauthn/login/get-options
 import { generateAuthenticationOptions } from '@simplewebauthn/server';
 import { NextFunction, Request, Response } from "express";
-import { ValidatedRequest } from "../oauth/validate";
-import { rpID } from './constants';
+import { ValidatedRequest } from "../../oauth/validate";
+import { rpID } from '../constants';
 
 export async function getLoginOptions(req: ValidatedRequest, res: Response, next: NextFunction) : Promise<void>;
 export async function getLoginOptions(req: Request, res: Response, next: NextFunction) : Promise<void>;
