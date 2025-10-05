@@ -48,7 +48,7 @@ services:
       timeout: 10s
       retries: 5
       start_period: 3s
-  reverse-proxy:
+  nginx:
     image: iangelo/nginx:latest
     container_name: nginx
     ports:

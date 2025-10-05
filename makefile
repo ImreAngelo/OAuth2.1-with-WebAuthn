@@ -1,4 +1,4 @@
-SERVICES := vault auth-server res-server
+SERVICES := vault auth-server nginx res-server
 
 .PHONY: all build dev $(SERVICES) client test install
 

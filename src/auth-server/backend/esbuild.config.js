@@ -1,4 +1,4 @@
-const { build } = require("esbuild");
+import { build } from "esbuild";
 
 /** Export metafile when this flag is set */
 const isAnalyzeFlagSet = process.argv.includes("--analyze");
