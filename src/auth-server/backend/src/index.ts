@@ -20,9 +20,15 @@ routes.register(app);
  * TODO: Maybe overkill for this scenario, just use SSR in prod and dev?
  **/
 if (IS_PRODUCTION) {
-	// Serve statically generated frontend
+	// TODO: Serve statically generated frontend
 	const assetsPath = path.join(__dirname, PUBLIC_PATH);
-	app.use(express.static(assetsPath));
+	app.use(express.static(assetsPath, { index:'index.html' }));
+	
+	// FALLBACK for non-root paths (TODO: Statically generate pages + 404 handling)
+	app.get("/{*r}", (req, res) => {
+		console.log("[Fallback] Serving route: ", req.path);
+		res.sendFile(path.join(assetsPath, "index.html"));
+	});
 } else {
 	(async () => { // Only load this dependency in dev mode
 		const { createProxyMiddleware } = await import("http-proxy-middleware");

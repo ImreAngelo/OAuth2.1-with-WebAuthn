@@ -3,7 +3,7 @@ import { render } from 'solid-js/web'
 import { Route, Router } from '@solidjs/router';
 import { MetaProvider } from '@solidjs/meta';
 import LoginPage from './login-page/index.tsx';
-// import App from './App.tsx'
+import App from './App.tsx';
 import './Globals.d.ts'
 import './index.css'
 
@@ -15,6 +15,7 @@ render(
 		() => (
 			<MetaProvider>
 				<Router> 
+					<Route path="/" component={App} />
 					<Route path="/authorize" component={LoginPage} />
 				</Router>
 			</MetaProvider>
