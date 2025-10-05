@@ -2,7 +2,7 @@
 import { generateAuthenticationOptions } from '@simplewebauthn/server';
 import { NextFunction, Request, Response } from "express";
 import { ValidatedRequest } from "@oauth/validate";
-import { rpID } from '../constants';
+import { rpID } from '@webauthn/constants';
 
 export async function getRegistrationOptions(req: ValidatedRequest, res: Response, next: NextFunction) : Promise<void>;
 export async function getRegistrationOptions(req: Request, res: Response, next: NextFunction) : Promise<void>;
