@@ -14,6 +14,7 @@ type Session = AuthorizationRequest & {
 
 /**
  * Save request
+ * TODO: Consider using distributed session store like redis
  * @param params 
  * @param maxTime 
  */

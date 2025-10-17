@@ -1,7 +1,8 @@
-import { generateAuthenticationOptions } from '@simplewebauthn/server';
+import { generateRegistrationOptions } from '@simplewebauthn/server';
 import { NextFunction, Request, Response } from "express";
 import { ValidatedRequest } from "@oauth/validate";
-import { rpID } from '@webauthn/constants';
+import { rpID, rpName } from '@webauthn/constants';
+import Database from '@database';
 
 export async function getRegistrationOptions(req: ValidatedRequest, res: Response, next: NextFunction) : Promise<void>;
 export async function getRegistrationOptions(req: Request, res: Response, next: NextFunction) : Promise<void>;
@@ -10,23 +11,33 @@ export async function getRegistrationOptions(req: Request, res: Response, next: 
  * Send WebAuthn authentication options
  */
 export async function getRegistrationOptions(req: ValidatedRequest | Request, res: Response, next: NextFunction) {
-    const request = req as ValidatedRequest;
-    const { state } = request.oauth;
-    
-	// const passkeys = await Database.query('CALL get_passkeys()').selectOne();
+    // const request = req as ValidatedRequest;
+    // const { state } = request.oauth;
+    const { key_name } = req.body;
 
-    const options: PublicKeyCredentialRequestOptionsJSON = await generateAuthenticationOptions({
+    // TODO: Validate key name
+    
+	const passkeys = await Database.query('CALL get_passkeys()').selectOne();
+
+    const options = await generateRegistrationOptions({
+        rpName,
         rpID,
-        // Require users to use a previously-registered authenticator
-        allowCredentials: [] 
-        // passkeys.map(passkey => ({
-        //     id: passkey.id,
-        //     transports: passkey.transports,
-        // })),
+        userName: key_name,
+        attestationType: 'none',
+        // Prevent users from re-registering existing authenticators
+        excludeCredentials: passkeys.map(({id, transports}: any) => ({
+            id: id,
+            transports: transports.split(','),
+        })),
+        // See "Guiding use of authenticators via authenticatorSelection"
+        authenticatorSelection: {
+            residentKey: 'preferred',
+            userVerification: 'preferred',
+        },
     });
 
     // (Pseudocode) Remember this challenge for this user
-    // login_sessions.set(state, options.challenge);
+    // sessions.set(mail, options.challenge);
 
 	res.status(200).json(options);
 }
