@@ -2,9 +2,13 @@ import getRegistrationOptions from './getRegistrationOptions';
 import logo from '../../logo';
 import style from './index.module.css';
 
-export default function StartState() {
+type StateStatePropsType = { setState: Setter<State> }
+
+export default function StartState(props: StateStatePropsType) {
     return (
-        <form id='registration-form' class={style['login-form']} onSubmit={getRegistrationOptions}>
+        <form id='registration-form' class={style['login-form']} 
+            onSubmit={(e) => getRegistrationOptions(e, props.setState)}
+        >
             <div class={style.header}>
                 {/* TODO: Inline logo */}
                 <span class={style.logo}>
@@ -66,6 +70,8 @@ export default function StartState() {
 }
 
 import fingerprint from "./noun-fingerprint.svg";
+import type { Setter } from 'solid-js';
+import type { State } from '../..';
 
 const LoginButton = ({ icon, children } : any) => (
     <button class={style.btn}>
