@@ -1,7 +1,8 @@
 import { NextFunction, Request, Response } from "express";
-import chalk from 'chalk';
 import AuthorizationRequest, { Schema } from "./AuthorizationRequest";
+import chalk from 'chalk';
 
+// TODO: Move to own file
 export type ValidatedRequest = Request & { oauth: AuthorizationRequest };
 
 /**

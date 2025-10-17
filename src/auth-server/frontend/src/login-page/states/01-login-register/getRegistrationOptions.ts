@@ -11,5 +11,14 @@ export default function getRegistrationOptions(e: SubmitEvent, setState: Setter<
     console.log("Form submitted with data:", data);
 
     // TODO: Submit data -> Start registration session on server
-    setState('REGISTER');
+    fetch('/user/register/start', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name: data.name, mail: data.mail }),
+    })
+    .then(r => r.json())
+    .then(r => {
+        if(r.success) setState('REGISTER');
+        // TODO: Suspense animation + error handling
+    })
 }

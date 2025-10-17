@@ -6,8 +6,12 @@ services:
       - 3000 
     networks:
       - secure
+      - database
     stdin_open: true
     tty: true
+    environment:
+      DB_USER: auth
+      DB_PASS: ${DB_AUTH_PASSWORD}
   database:
     image: mariadb:12
     # attach: false # Hide logs

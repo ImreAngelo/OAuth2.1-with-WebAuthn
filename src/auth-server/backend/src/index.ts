@@ -1,5 +1,6 @@
 import express, { Request, Response } from "express";
 import cookieParser from 'cookie-parser';
+import bodyparser from 'body-parser';
 import path from "path";
 import * as routes from "./routes";
 
@@ -11,6 +12,7 @@ const app = express();
 
 // TODO: Use a secret key retrieved from vault
 app.use(cookieParser());
+app.use(bodyparser.json());
 
 // Keep routes defined in routes.ts for readability
 routes.register(app);

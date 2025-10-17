@@ -1,36 +1,17 @@
 import * as mariadb from 'mariadb';
+import { ChainStep, OkPacket } from './types';
 
 /**
  * TODO: Handle column-level encryption/decryption
  */
 const pool = mariadb.createPool({
-	host: process.env.DB_HOST || "db", 
+	host: process.env.DB_HOST || "database", 
 	port: Number(process.env.DB_PORT) || 3306,
-	database: process.env.DB_NAME || "demo",
-	password: process.env.DB_PASS, 
+	database: process.env.DB_NAME || "authn",
+	password: process.env.DB_PASS,
 	user: process.env.DB_USER,
 	connectionLimit: 5
 });
-
-type QueryStep = {
-	type: 'query';
-	sql: string;
-	params: any[] | ((context: any) => any[]);
-	context?: (context: any) => object;
-};
-
-type TransformStep = {
-	type: 'transform';
-	fn: (context: any) => any;
-};
-
-type OkPacket = {
-	affectedRows: number;
-	insertId: bigint;
-	warningStatus: number;
-};
-
-type ChainStep = QueryStep | TransformStep;
 
 /**
  * A chain of database queries and transformations wrapped in a transaction
@@ -125,6 +106,28 @@ export default class Database<T = OkPacket> implements PromiseLike<T> {
 			}
 		});
 		return this as unknown as Database<U>;
+	}
+
+	/**
+	 * Checks whether the current context (typically a query result) contains any rows.
+	 * 
+	 * @returns {Database<boolean>} A new chain step resolving to true or false.
+	 */
+	exists(): Database<boolean> {
+		this.chain.push({
+			type: 'transform',
+			fn: (context: any) => {
+				if (Array.isArray(context)) {
+					return context.length > 0;
+				}
+				// Some MariaDB drivers return resultsets as objects with .length
+				if (context && typeof context.length === 'number') {
+					return context.length > 0;
+				}
+				return false;
+			}
+		});
+		return this as unknown as Database<boolean>;
 	}
 
 	/**

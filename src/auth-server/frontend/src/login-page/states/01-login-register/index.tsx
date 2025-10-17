@@ -5,6 +5,8 @@ import style from './index.module.css';
 type StateStatePropsType = { setState: Setter<State> }
 
 export default function StartState(props: StateStatePropsType) {
+    // TODO: Add fade-out/in and waiting animation
+
     return (
         <form id='registration-form' class={style['login-form']} 
             onSubmit={(e) => getRegistrationOptions(e, props.setState)}
