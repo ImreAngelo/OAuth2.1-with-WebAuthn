@@ -1,8 +1,8 @@
 // import { Route, Router } from '@solidjs/router';
 import { Title } from "@solidjs/meta";
-import style from './login.module.css';
-import FormStateA from './states/a';
 import { createEffect, createSignal } from "solid-js";
+import StartState from "./states/01-login-register";
+import style from './login.module.css';
 
 export default function LoginPage() {
     const [loginOptions, setLoginOptions] = createSignal({});
@@ -29,7 +29,7 @@ export default function LoginPage() {
                 {/* <Router>
                     <Route />
                 </Router> */}
-                <FormStateA/>
+                <StartState/>
                 <footer class={`${style.footer} muted`}>
                     Copyright &copy; 2025
                 </footer>
