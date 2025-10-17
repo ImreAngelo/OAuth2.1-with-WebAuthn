@@ -1,23 +1,17 @@
+// import React from 'react';
 // import { register } from '../../webauthn/register';
 import style from './a.module.css';
 
 function getRegistrationOptions(e: SubmitEvent) {
     e.preventDefault();
-    // console.log("E: ", new FormData(e.target))
 
-    // const { form } = e.val;
+    const form = e.currentTarget as HTMLFormElement;
+    const fd = new FormData(form);
+    const data = Object.fromEntries(fd.entries());
 
-    // const formData = {
-    //     name: name(),
-    //     email: email(),
-    // };
+    console.log("Form submitted with data:", data);
 
-    const formData = {
-        
-    };
-
-    console.log("Form submitted with data:", formData);
-
+    // TODO: Submit data -> Start registration session on server
     // register()
 }
 
