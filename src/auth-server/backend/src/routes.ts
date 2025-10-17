@@ -18,6 +18,6 @@ export function register(app: Express) {
     app.post("/webauthn/login/options", [OAuth.session.link, WebAuthn.login.getOptions])
 
     // First-Party User Registration
-    // TODO: Link to session to prevent leaking information about ongoing registrations
+    // TODO: Use sessions to prevent leaking information about ongoing registrations
     app.post("/user/register/start", [start])
 }

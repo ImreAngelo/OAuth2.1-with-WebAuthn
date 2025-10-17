@@ -1,8 +1,8 @@
 import { Title } from "@solidjs/meta";
 import { createSignal, Match, Switch } from "solid-js";
+import RegisterState from "./states/02-setup-webauthn";
 import StartState from "./states/01-login-register";
 import style from './login.module.css';
-import RegisterState from "./states/02-setup-webauthn";
 
 export type State = 'START' | 'REGISTER' | 'COMPLETE';
 

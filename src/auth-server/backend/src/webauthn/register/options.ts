@@ -14,6 +14,8 @@ export async function getRegistrationOptions(req: ValidatedRequest | Request, re
     // const request = req as ValidatedRequest;
     // const { state } = request.oauth;
     const { key_name } = req.body;
+
+    // TODO: Validate key name
     
 	const passkeys = await Database.query('CALL get_passkeys()').selectOne();
 
@@ -23,9 +25,9 @@ export async function getRegistrationOptions(req: ValidatedRequest | Request, re
         userName: key_name,
         attestationType: 'none',
         // Prevent users from re-registering existing authenticators
-        excludeCredentials: passkeys.map((passkey: any) => ({
-            id: passkey.id,
-            transports: passkey.transports,
+        excludeCredentials: passkeys.map(({id, transports}: any) => ({
+            id: id,
+            transports: transports.split(','),
         })),
         // See "Guiding use of authenticators via authenticatorSelection"
         authenticatorSelection: {
