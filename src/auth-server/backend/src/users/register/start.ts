@@ -1,8 +1,9 @@
 import { Request, Response } from "express";
-import { UserType, Schema } from "./UserType";
-import chalk from "chalk";
+import { Schema } from "./UserType";
+import { hash } from "@crypto";
 import Database from "@database";
-import hash from "@crypto/hash";
+import sessions from "./session";
+import chalk from "chalk";
 
 /**
  * Start a registration session
@@ -51,6 +52,3 @@ function makeError(res: Response, msg: string = "An unexprected error occurred")
         details: msg,
     });
 }
-
-// TODO: In production, consider using a cache for a distributed system
-const sessions = new Map<string, UserType>();

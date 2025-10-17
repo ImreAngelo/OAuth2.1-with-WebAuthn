@@ -9,5 +9,5 @@ export const Schema = z.object({
         .max(128, "e-mail must be at most 128 characters"),
 });
 
-export type UserType = z.infer<typeof Schema>;
+type UserType = z.infer<typeof Schema>;
 export default UserType;

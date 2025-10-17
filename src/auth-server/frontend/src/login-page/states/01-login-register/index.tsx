@@ -1,10 +1,9 @@
+import { style, type StatePropsType } from '../shared';
 import getRegistrationOptions from './getRegistrationOptions';
 import logo from '../../logo';
-import style from './index.module.css';
 
-type StateStatePropsType = { setState: Setter<State> }
 
-export default function StartState(props: StateStatePropsType) {
+export default function StartState(props: StatePropsType) {
     // TODO: Add fade-out/in and waiting animation
 
     return (
@@ -72,8 +71,6 @@ export default function StartState(props: StateStatePropsType) {
 }
 
 import fingerprint from "./noun-fingerprint.svg";
-import type { Setter } from 'solid-js';
-import type { State } from '../..';
 
 const LoginButton = ({ icon, children } : any) => (
     <button class={style.btn}>

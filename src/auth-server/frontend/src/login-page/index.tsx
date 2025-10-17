@@ -2,6 +2,7 @@ import { Title } from "@solidjs/meta";
 import { createSignal, Match, Switch } from "solid-js";
 import StartState from "./states/01-login-register";
 import style from './login.module.css';
+import RegisterState from "./states/02-setup-webauthn";
 
 export type State = 'START' | 'REGISTER' | 'COMPLETE';
 
@@ -30,7 +31,7 @@ export default function LoginPage() {
             <div class={style.plain}>
                 <Switch>
                     <Match when={state() === 'START'}><StartState setState={setState}/></Match>
-                    <Match when={state() === 'REGISTER'}>WebAuthn stuff...</Match>
+                    <Match when={state() === 'REGISTER'}><RegisterState/></Match>
                 </Switch>
                 <footer class={`${style.footer} muted`}>
                     Copyright &copy; 2025

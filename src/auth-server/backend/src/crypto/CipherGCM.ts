@@ -25,7 +25,7 @@ export default class CipherGCM {
 	}
 
 	/**
-	 * Stringify data for storage
+	 * Serialize data for storage
 	 * @returns colon-delimited list in order: iv, tag, ciphertext
 	 */
 	toString(): string {
