@@ -1,4 +1,4 @@
-import { defineConfig } from "vitest/config";
+import { defineConfig, configDefaults } from "vitest/config";
 
 export default defineConfig({
 	test: {
@@ -7,6 +7,10 @@ export default defineConfig({
 			reporter: ['json-summary', 'text'],
 			include: ['src/**'],
 		},
+		exclude:[
+			...configDefaults.exclude,
+			'**/helpers.ts',
+		]
 	},
 	resolve: {
 		alias: {
