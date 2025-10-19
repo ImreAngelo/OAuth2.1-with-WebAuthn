@@ -10,8 +10,10 @@ export default defineConfig({
 	},
 	resolve: {
 		alias: {
+			"@crypto": "/src/crypto",
 			"@database": "/src/database",
 			"@oauth": "/src/oauth",
+			"@users": "/src/users",
 			"@webauthn": "/src/webauthn",
 		},
 	},
