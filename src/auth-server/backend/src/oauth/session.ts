@@ -26,8 +26,8 @@ function makeSession(params: AuthorizationRequest, maxTime = 300000) {
         timer: setTimeout(() => removeSession(id, true), maxTime)
     });
 
-    console.log(chalk.bold.yellow("UUID: "), id)
-    debugPrint(params);
+    // console.log(chalk.bold.yellow("UUID: "), id)
+    // debugPrint(params);
 
     return id;
 }
@@ -53,10 +53,21 @@ function removeSession(id: UUID, timeout: boolean = false) {
 export function startSession(req: Request, res: Response, next: NextFunction) {
     const oauth = (req as ValidatedRequest).oauth;
     const sessionID = makeSession(oauth);
-
+    const now = Date.now();
+    const maxAge = 300000;  // Valid for 5 minutes
+    
     (req as any).sessionID = sessionID;
+    
     res.cookie('oauth_request_id', sessionID, {
-        maxAge: 300000, // Valid for 5 minutes
+        expires: new Date(now + maxAge),
+        maxAge: maxAge,
+        secure: true,
+        httpOnly: true,
+        sameSite: "strict",
+        domain: "localhost",    // TODO: Get host domain from environment, default localhost
+        path: "/authorize",     // TODO: Get endpoint from environment, use /login probably
+        partitioned: true,      // Isolated per top-level site (new spec)
+        priority: "high",
     });
 
     return next();

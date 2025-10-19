@@ -1,4 +1,5 @@
 import express, { Request, Response } from "express";
+import rateLimit from "express-rate-limit";
 import cookieParser from 'cookie-parser';
 import bodyparser from 'body-parser';
 import path from "path";
@@ -8,11 +9,18 @@ const IS_PRODUCTION = (process.env.NODE_ENV === "production");
 const PUBLIC_PATH = "./public";
 const PORT = process.env.PORT || 3000;
 
+// Set up express and middleware
 const app = express();
 
-// TODO: Use a secret key retrieved from vault
-app.use(cookieParser());
 app.use(bodyparser.json());
+app.use(cookieParser());
+app.use(rateLimit({ // 50 requests per 15 minutes
+	windowMs: 15 * 60 * 1000,
+	limit: 50, // TODO: Fine-tune params
+	ipv6Subnet: 64,
+	// store: rate-limit-redis,
+}));
+
 
 // Keep routes defined in routes.ts for readability
 routes.register(app);
