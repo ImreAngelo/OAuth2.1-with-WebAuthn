@@ -14,25 +14,26 @@ jobs:
       actions: read
       checks: read
     steps:
-      - uses: actions/checkout@v5
+      - name: checkout
+        uses: actions/checkout@v5
 
-      - name: 🚀 Set up PNPM
+      - name: pnpm setup
         uses: pnpm/action-setup@v4
         with:
           version: 10
       
-      - name: 🔨 Install dependencies
+      - name: install dependencies
         run: make install
 
-      - name: ♻️ Reset badges branch
+      - name: reset 'badges' branch
         continue-on-error: true
         run: git push origin --delete badges |
           git checkout -b badges 
 
-      - name: 🔍 Run tests
+      - name: run tests
         run: make test
 
-      - name: ⚙️ Generate coverage badges
+      - name: generate coverage badges
         uses: jpb06/coverage-badges-action@latest
         with:
           target-branch: badges
