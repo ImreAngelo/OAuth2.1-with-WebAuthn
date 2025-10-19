@@ -26,8 +26,8 @@ function makeSession(params: AuthorizationRequest, maxTime = 300000) {
         timer: setTimeout(() => removeSession(id, true), maxTime)
     });
 
-    console.log(chalk.bold.yellow("UUID: "), id)
-    debugPrint(params);
+    // console.log(chalk.bold.yellow("UUID: "), id)
+    // debugPrint(params);
 
     return id;
 }

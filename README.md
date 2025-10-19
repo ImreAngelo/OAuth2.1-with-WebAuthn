@@ -108,6 +108,7 @@ Assuming a *maximally powerful adversary* with full access to the database (e.g.
 
 ## TODO
 - [ ] Use docker secrets instead of environment
+- [ ] #10
 - [ ] https://github.com/ImreAngelo/OAuth2.1-with-WebAuthn/issues/11
 - [ ] https://github.com/ImreAngelo/OAuth2.1-with-WebAuthn/issues/9
 
