@@ -4,13 +4,15 @@ export default defineConfig({
 	test: {
 		environment: "node",
 		coverage: {
-			reporter: ['json-summary', 'text'],
+      		reportsDirectory: './coverage',
+			reporter: ['json-summary', 'text', 'html'],
 			include: ['src/**'],
+			exclude:[
+				...configDefaults.exclude,
+				'**/helpers.ts',
+				'src/index.ts',
+			]
 		},
-		exclude:[
-			...configDefaults.exclude,
-			'**/helpers.ts',
-		]
 	},
 	resolve: {
 		alias: {
