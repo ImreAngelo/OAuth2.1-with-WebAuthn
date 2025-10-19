@@ -35,11 +35,10 @@ export default class Database<T = OkPacket> implements PromiseLike<T> {
 	}
 
 	/**
-	 * Creates a new chainable database connection.
-	 * 
-	 * @returns {Database<T>} A new `Database` instance.
+	 * @deprecated Creates a new chainable database connection. Performed automatically!
 	 */
 	static connect<T = any>(): Database<T> {
+		console.log("Explicitly calling Database.connect<T>() is deprecated.")
 		return new Database<T>();
 	}
 
@@ -102,7 +101,8 @@ export default class Database<T = OkPacket> implements PromiseLike<T> {
 				if (Array.isArray(context) || context[0])
 					return context[0];
 
-				throw new Error(".selectOne() called on non-array result");
+				return {};
+				// throw new Error(".selectOne() called on non-array result");
 			}
 		});
 		return this as unknown as Database<U>;
@@ -121,9 +121,9 @@ export default class Database<T = OkPacket> implements PromiseLike<T> {
 					return context.length > 0;
 				}
 				// Some MariaDB drivers return resultsets as objects with .length
-				if (context && typeof context.length === 'number') {
-					return context.length > 0;
-				}
+				// if (context && typeof context.length === 'number') {
+				// 	return context.length > 0;
+				// }
 				return false;
 			}
 		});
