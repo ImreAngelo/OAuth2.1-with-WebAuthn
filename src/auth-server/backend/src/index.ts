@@ -10,7 +10,6 @@ const PORT = process.env.PORT || 3000;
 
 const app = express();
 
-// TODO: Use a secret key retrieved from vault
 app.use(cookieParser());
 app.use(bodyparser.json());
 
