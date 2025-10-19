@@ -35,14 +35,6 @@ export default class Database<T = OkPacket> implements PromiseLike<T> {
 	}
 
 	/**
-	 * @deprecated Creates a new chainable database connection. Performed automatically!
-	 */
-	static connect<T = any>(): Database<T> {
-		console.log("Explicitly calling Database.connect<T>() is deprecated.")
-		return new Database<T>();
-	}
-
-	/**
 	 * Starts a new query chain with an initial SQL statement and optional parameters.
 	 * 
 	 * @param {string} sql - The SQL query string to execute.
