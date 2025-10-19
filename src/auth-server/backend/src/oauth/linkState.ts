@@ -3,6 +3,7 @@ import { UUID } from "node:crypto";
 import chalk from 'chalk';
 import { ValidatedRequest } from "./validate";
 import { getSession } from "./session";
+import z from "zod";
 
 
 /**
@@ -12,8 +13,8 @@ import { getSession } from "./session";
  * @param next Express next function
  */
 export function linkState(req: Request, res: Response, next: NextFunction) {
-    const { cookies } = req;
-    const id : UUID = cookies.oauth_request_id; 
+    const { cookies } = req; // TODO: Input validation
+    const id : UUID = cookies.oauth_request_id;
     const session = getSession(id);
 
     console.log(`Linking oauth '${id}' to session:`, session)
@@ -31,3 +32,5 @@ export function linkState(req: Request, res: Response, next: NextFunction) {
     console.log(chalk.green("✅ Linked OAuth state via cookie"));
     return next();
 }
+
+const LinkStateSchema = z.object({ })
