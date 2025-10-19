@@ -109,14 +109,10 @@ export default class Database<T = OkPacket> implements PromiseLike<T> {
 		this.chain.push({
 			type: 'transform',
 			fn: (context: any) => {
-				if (Array.isArray(context)) {
+				// Works for objects with arrays and generic objects with a .length
+				if (context && typeof context.length === 'number') {
 					return context.length > 0;
 				}
-				// Some MariaDB drivers return resultsets as objects with .length
-				// if (context && typeof context.length === 'number') {
-				// 	return context.length > 0;
-				// }
-				// TODO: Or throw?
 				return false;
 			}
 		});
