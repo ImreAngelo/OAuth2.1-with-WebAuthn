@@ -65,7 +65,7 @@ make x
 
 
 ## OAuth 2.1 Protocol
-Defined in <a href="https://datatracker.ietf.org/doc/html/draft-ietf-oauth-v2-1-13">an active RFC draft</a>[^1], OAuth 2.1 aims to simplify and unifi the many protocols part of the previous OAuth 2.0 standard (various requests for comment, including <a href="https://datatracker.ietf.org/doc/html/rfc6749">RFC6749</a>)
+Defined in an active RFC draft[^1], OAuth 2.1 aims to simplify and unifi the many protocols part of the previous OAuth 2.0 standard (various requests for comment, including RFC6749[^2])
 
 <picture>
   <source
@@ -95,10 +95,8 @@ Assuming a *maximally powerful adversary* with full access to the database (e.g.
 - **Post-Compromise Security:** Master keys are rotated periodically. Even if an attacker eventually recovers a historical master key, data added to the database after the rotation remains protected. 
 <!-- Recovering the master key will likely take much longer than the key-rotation time, so new data added to the DB that was not part of the original leak is still safe even if the attacker recovers the original master key.  -->
 
-> [!NOTE]
-> The project uses AES-128 DEKs and AES-256 master keys by default. Breaking these encryptions are considered unfeasible, the data is likely safe even if the database is leaked.
->
-> 
+> [!IMPORTANT]
+> The project uses AES-128 DEKs and AES-256 master keys by default. Breaking these encryptions are considered unfeasible, the data is likely safe even if the database is leaked. 
 
 ## WebAuthn
 *explanation*
@@ -109,10 +107,10 @@ Assuming a *maximally powerful adversary* with full access to the database (e.g.
 > This reduces the initial page load by a single round-trip, but means we cannot easily cache the site and the initial response should include a `Cache-Control: no-cache` header to prevent storing stale options.
 
 ## TODO
-- [ ] Clean up authorization server frontend/backend structure
-- [ ] Move services into their own repositories and use submodules
 - [ ] Use docker secrets instead of environment
-- [ ] [Enable mTLS between services](https://github.com/ImreAngelo/OAuth2.1-with-WebAuthn/issues/9#issue-3530078065)
+- [ ] https://github.com/ImreAngelo/OAuth2.1-with-WebAuthn/issues/11
+- [ ] https://github.com/ImreAngelo/OAuth2.1-with-WebAuthn/issues/9
 
 ## References
 [^1]: [The OAuth 2.1 Authorization Framework](https://datatracker.ietf.org/doc/html/draft-ietf-oauth-v2-1-13)
+[^2]: [RFC6749](https://datatracker.ietf.org/doc/html/rfc6749)
