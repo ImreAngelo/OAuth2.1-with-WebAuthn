@@ -32,7 +32,7 @@ export const Schema = z.object({
     redirect_uri: z
         .url("redirect_uri is not a valid URL")
         .transform((val) => new URL(val))
-        .optional(),
+        .optional().default(new URL("https://localhost/login_success")), // Default to first-party web client
         // TODO: need to add %3A to regex for URL query params ":" etc.
         // .regex(unreservedRegex, "redirect_uri contains invalid characters"),
         // .optional(), 
