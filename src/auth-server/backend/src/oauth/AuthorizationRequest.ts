@@ -25,13 +25,14 @@ export const Schema = z.object({
     code_challenge_method: z.enum(
         ["plain","S256"], 
         "code_challenge_method must be 'plain' or 'S256'",
-    ),
+    ).optional().default("S256"),
     
     // OPTIONAL if only one redirect URI is registered for this client. 
     // REQUIRED if multiple redirict URIs are registered for this client.
     redirect_uri: z
         .url("redirect_uri is not a valid URL")
-        .transform((val) => new URL(val)),
+        .transform((val) => new URL(val))
+        .optional(),
         // TODO: need to add %3A to regex for URL query params ":" etc.
         // .regex(unreservedRegex, "redirect_uri contains invalid characters"),
         // .optional(), 

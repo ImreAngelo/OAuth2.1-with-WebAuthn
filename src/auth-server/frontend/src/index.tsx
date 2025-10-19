@@ -16,7 +16,7 @@ render(
 			<MetaProvider>
 				<Router> 
 					<Route path="/" component={App} />
-					<Route path="/authorize" component={LoginPage} />
+					<Route path="/login" component={LoginPage} />
 				</Router>
 			</MetaProvider>
 		),

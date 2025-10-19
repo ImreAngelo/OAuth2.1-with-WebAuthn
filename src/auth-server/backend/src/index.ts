@@ -12,6 +12,9 @@ const PORT = process.env.PORT || 3000;
 // Set up express and middleware
 const app = express();
 
+// Trust proxies inside docker network (nginx)
+app.set('trust proxy', '172.16.0.0/12');
+
 app.use(bodyparser.json());
 app.use(cookieParser());
 app.use(rateLimit({ // 50 requests per 15 minutes

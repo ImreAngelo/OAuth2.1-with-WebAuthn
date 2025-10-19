@@ -11,7 +11,7 @@ export function register(app: Express) {
     })
 
     // OAuth 2.1
-    app.get("/authorize", [OAuth.validate, OAuth.session.start])
+    app.get(OAuth.endpoint, [OAuth.validate, OAuth.session.start])
 
     // WebAuthn
     app.post("/webauthn/register/options", [OAuth.session.link, WebAuthn.register.getOptions])
