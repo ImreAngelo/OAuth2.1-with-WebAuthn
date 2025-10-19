@@ -2,8 +2,9 @@ import { randomUUID, UUID } from "node:crypto";
 import AuthorizationRequest from "./AuthorizationRequest";
 import { NextFunction, Request, Response } from "express";
 import { ValidatedRequest } from "./validate";
-import { debugPrint } from "./helpers";
+// import { debugPrint } from "./helpers";
 import chalk from "chalk";
+import { endpoint } from "@oauth";
 
 // TODO: In production, consider using a cache for a distributed system
 const sessions = new Map<UUID, Session>();
@@ -64,9 +65,9 @@ export function startSession(req: Request, res: Response, next: NextFunction) {
         secure: true,
         httpOnly: true,
         sameSite: "strict",
-        domain: "localhost",    // TODO: Get host domain from environment, default localhost
-        path: "/authorize",     // TODO: Get endpoint from environment, use /login probably
-        partitioned: true,      // Isolated per top-level site (new spec)
+        domain: process.env.DOMAIN,
+        path: endpoint,
+        partitioned: true, // Isolated per top-level site
         priority: "high",
     });
 

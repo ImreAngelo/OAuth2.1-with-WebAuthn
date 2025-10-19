@@ -12,6 +12,8 @@ services:
     environment:
       DB_USER: auth
       DB_PASS: ${DB_AUTH_PASSWORD}
+      OAUTH_ENDPOINT: /login
+      HOST_DOMAIN: localhost
   database:
     image: mariadb:12
     # attach: false # Hide logs

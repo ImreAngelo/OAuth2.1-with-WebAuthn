@@ -8,6 +8,9 @@ import * as link from "./linkState";
 import * as session from "./session";
 import * as validate from "./validate";
 
+// OAuth 2.1 authorization endpoint
+export const endpoint = process.env.OAUTH_ENDPOINT || "/authorize";
+
 export const OAuth = {
     ...validate,
     session: {
@@ -16,5 +19,6 @@ export const OAuth = {
         link: link.linkState,
     },
     require: link.linkState,
+    endpoint: endpoint
 };
 export default OAuth;
