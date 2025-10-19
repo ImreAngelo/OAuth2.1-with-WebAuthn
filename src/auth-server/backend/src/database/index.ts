@@ -35,15 +35,6 @@ export default class Database<T = OkPacket> implements PromiseLike<T> {
 	}
 
 	/**
-	 * Creates a new chainable database connection.
-	 * 
-	 * @returns {Database<T>} A new `Database` instance.
-	 */
-	static connect<T = any>(): Database<T> {
-		return new Database<T>();
-	}
-
-	/**
 	 * Starts a new query chain with an initial SQL statement and optional parameters.
 	 * 
 	 * @param {string} sql - The SQL query string to execute.
@@ -102,6 +93,7 @@ export default class Database<T = OkPacket> implements PromiseLike<T> {
 				if (Array.isArray(context) || context[0])
 					return context[0];
 
+				// return undefined; // <- can be used for existence check instead of separate .exist() function
 				throw new Error(".selectOne() called on non-array result");
 			}
 		});
@@ -121,9 +113,10 @@ export default class Database<T = OkPacket> implements PromiseLike<T> {
 					return context.length > 0;
 				}
 				// Some MariaDB drivers return resultsets as objects with .length
-				if (context && typeof context.length === 'number') {
-					return context.length > 0;
-				}
+				// if (context && typeof context.length === 'number') {
+				// 	return context.length > 0;
+				// }
+				// TODO: Or throw?
 				return false;
 			}
 		});

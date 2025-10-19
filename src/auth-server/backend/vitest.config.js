@@ -1,11 +1,17 @@
-import { defineConfig } from "vitest/config";
+import { defineConfig, configDefaults } from "vitest/config";
 
 export default defineConfig({
 	test: {
 		environment: "node",
 		coverage: {
-			reporter: ['json-summary', 'text'],
+      		reportsDirectory: './coverage',
+			reporter: ['json-summary', 'text', 'html'],
 			include: ['src/**'],
+			exclude:[
+				...configDefaults.exclude,
+				'**/helpers.ts',
+				'src/index.ts',
+			]
 		},
 	},
 	resolve: {
