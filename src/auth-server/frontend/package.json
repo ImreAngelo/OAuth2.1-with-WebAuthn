@@ -12,11 +12,11 @@
     "@simplewebauthn/browser": "^13.2.0",
     "@solidjs/meta": "^0.29.4",
     "@solidjs/router": "^0.15.3",
-    "autoprefixer": "^10.4.21",
     "solid-js": "^1.9.9"
   },
   "devDependencies": {
     "@types/node": "^24.5.2",
+    "autoprefixer": "^10.4.21",
     "cssnano": "^7.1.1",
     "postcss": "^8.5.6",
     "postcss-load-config": "^6.0.1",

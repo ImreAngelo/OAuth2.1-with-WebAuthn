@@ -101,8 +101,8 @@ export default class Database<T = OkPacket> implements PromiseLike<T> {
 				if (Array.isArray(context) || context[0])
 					return context[0];
 
-				return {};
-				// throw new Error(".selectOne() called on non-array result");
+				// return undefined; // <- can be used for existence check instead of separate .exist() function
+				throw new Error(".selectOne() called on non-array result");
 			}
 		});
 		return this as unknown as Database<U>;
@@ -124,6 +124,7 @@ export default class Database<T = OkPacket> implements PromiseLike<T> {
 				// if (context && typeof context.length === 'number') {
 				// 	return context.length > 0;
 				// }
+				// TODO: Or throw?
 				return false;
 			}
 		});
