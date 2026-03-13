@@ -4,3 +4,6 @@
 [submodule "containers/authorization-server"]
 	path = containers/authorization-server
 	url = https://github.com/ProjectOAWA/authorization-server.git
+[submodule "containers/nginx"]
+	path = containers/nginx
+	url = https://github.com/ProjectOAWA/nginx.git
