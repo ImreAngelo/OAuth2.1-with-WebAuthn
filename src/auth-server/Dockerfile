@@ -9,8 +9,10 @@ RUN corepack enable && corepack prepare pnpm@latest --activate
 WORKDIR /app
 
 # Install dependencies
-COPY package.json pnpm*.yaml ./
-RUN pnpm install
+COPY package.json pnpm-lock.yaml ./
+COPY frontend/package.json frontend/pnpm-lock.yaml frontend/
+COPY backend/package.json backend/pnpm-lock.yaml backend/
+RUN pnpm install && pnpm --prefix frontend install && pnpm --prefix backend install
 
 # Build project
 ADD . .
