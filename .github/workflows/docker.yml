@@ -69,12 +69,10 @@ jobs:
       # TODO: Build using docker-bake.hcl
       
   deploy:
-    name: Deploy to Server
+    name: Deploy to Server (IPv6)
     runs-on: ubuntu-latest
     needs: build-and-push
     environment: Production
-    env:
-        DEPLOY_PROTOCL: tcp6
 
     steps:
       - name: Checkout repository
@@ -83,6 +81,11 @@ jobs:
       - name: Rename prod compose file for upload
         run: cp docker-compose.prod.yml docker-compose.yml
 
+      # IPv6
+      - name: Set up WARP
+        uses: fscarmen/warp-on-actions@v1.1
+        with:
+          stack: dual
       - name: testing ipv6 for command
         run: |
           curl -m 9 --ipv6 --verbose https://google.com
@@ -95,7 +98,7 @@ jobs:
           key: ${{ secrets.DEPLOY_SSH_KEY }}
           passphrase: ${{ secrets.DEPLOY_SSH_PASS }}
           # fingerprint: ${{ secrets.DEPLOY_FINGERPRINT }}
-          protocol: ${{ env.DEPLOY_PROTOCOL }}
+          protocol: tcp6
           source: docker-compose.yml
           target: ${{ env.DEPLOY_PATH }}
           overwrite: true
