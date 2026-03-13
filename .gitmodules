@@ -1,3 +1,12 @@
-[submodule "deps/altinn-din"]
-	path = deps/altinn-din
-	url = https://github.com/Altinn/altinn-din
+[submodule "containers/frontend"]
+	path = containers/frontend
+	url = https://github.com/ProjectOAWA/frontend.git
+[submodule "containers/authorization-server"]
+	path = containers/authorization-server
+	url = https://github.com/ProjectOAWA/authorization-server.git
+[submodule "containers/nginx"]
+	path = containers/nginx
+	url = https://github.com/ProjectOAWA/nginx.git
+[submodule "clients/python"]
+	path = clients/python
+	url = https://github.com/ProjectOAWA/python-client.git
