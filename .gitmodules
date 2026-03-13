@@ -1,3 +1,6 @@
 [submodule "containers/frontend"]
 	path = containers/frontend
 	url = https://github.com/ProjectOAWA/frontend.git
+[submodule "containers/authorization-server"]
+	path = containers/authorization-server
+	url = https://github.com/ProjectOAWA/authorization-server.git
