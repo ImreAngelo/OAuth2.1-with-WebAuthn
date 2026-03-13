@@ -7,3 +7,6 @@
 [submodule "containers/nginx"]
 	path = containers/nginx
 	url = https://github.com/ProjectOAWA/nginx.git
+[submodule "clients/python"]
+	path = clients/python
+	url = https://github.com/ProjectOAWA/python-client.git
