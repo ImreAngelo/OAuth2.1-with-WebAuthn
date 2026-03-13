@@ -81,7 +81,7 @@ jobs:
       - name: Rename prod compose file for upload
         run: cp docker-compose.prod.yml docker-compose.yml
 
-      # IPv6
+      # Support IPv6 on GitHub via Cloudflare WARP
       - name: Set up WARP
         uses: fscarmen/warp-on-actions@v1.1
         with:
@@ -96,7 +96,7 @@ jobs:
           host: ${{ secrets.DEPLOY_HOST }}
           username: ${{ secrets.DEPLOY_USER }}
           key: ${{ secrets.DEPLOY_SSH_KEY }}
-          passphrase: ${{ secrets.DEPLOY_SSH_PASS }}
+          passphrase: ${{ secrets.DEPLOY_PASSPHRASE }}
           # fingerprint: ${{ secrets.DEPLOY_FINGERPRINT }}
           protocol: tcp6
           source: docker-compose.yml
@@ -109,7 +109,7 @@ jobs:
           host: ${{ secrets.DEPLOY_HOST }}
           username: ${{ secrets.DEPLOY_USER }}
           key: ${{ secrets.DEPLOY_SSH_KEY }}
-          passphrase: ${{ secrets.DEPLOY_SSH_PASS }}
+          passphrase: ${{ secrets.DEPLOY_PASSPHRASE }}
           # fingerprint: ${{ secrets.DEPLOY_FINGERPRINT }}
           script: |
             cd ${{ env.DEPLOY_PATH }}
