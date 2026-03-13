@@ -1,3 +1,2 @@
-FROM frontend-base AS frontend
 FROM nginx-base
-COPY --from=frontend /app/build /usr/share/nginx/html
+COPY --from=frontend-base /app/build /usr/share/nginx/html

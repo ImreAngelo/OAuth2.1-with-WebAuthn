@@ -56,15 +56,14 @@ services:
       retries: 5
       start_period: 3s
   nginx:
-    build:
-      context: ./containers/nginx
+    image: nginx-proxy:latest
     container_name: nginx
     ports:
       - 80:80
       - 443:443/tcp
       - 443:443/udp
     volumes:
-      - ./containers/nginx/containers/conf.d:/etc/nginx/conf.d
+      - ./containers/nginx/src/conf.d:/etc/nginx/conf.d
     networks:
       - secure
 volumes:

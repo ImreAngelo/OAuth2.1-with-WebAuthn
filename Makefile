@@ -1,9 +1,9 @@
-SERVICES := auth-server database nginx vault
+SERVICES := authorization database vault
 
 .PHONY: all build dev $(SERVICES) client test install
 
-all: build
 
+all: build-nginx docker-up
 
 ##########
 # DOCKER #
@@ -14,17 +14,28 @@ build: $(SERVICES)
 
 # Run `make auth-server` or `make vault` from top-level directory to build specific service
 $(SERVICES):
-	$(MAKE) -C src/$@
+	docker compose -f 'docker-compose.yml' up -d --build '$@'
 
-dev:
-	make dev -C ./containers
+build-nginx:
+	docker buildx bake
+nginx: build-nginx 
+	docker compose -f 'docker-compose.yml' up -d --build 'vault'
+
+docker-up:
+	docker compose -f 'docker-compose.yml' up -d
+
+# TODO: Non-docker devmode with hot reload etc
+# dev:
+# 	make dev -C ./containers
 
 
-##########
-# CLIENT #
-##########
+###########
+# CLIENTS #
+###########
 
-client:
+client: client-python
+
+client-python:
 	@if [ ! -d ".venv" ]; then \
 		echo "Creating virtual environment..."; \
 		python3 -m venv .venv; \
@@ -41,7 +52,9 @@ client:
 #########
 
 install:
-	make install -C ./containers
+	pnpm install
 
+# TODO: Fix command, just pnpm test --filter etc.?
 test:
-	make test -C ./containers
+	echo "TODO: Implement top-level test command"
+# 	make test -C ./containers
