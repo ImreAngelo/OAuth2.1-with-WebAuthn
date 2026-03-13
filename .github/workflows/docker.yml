@@ -97,11 +97,10 @@ jobs:
           username: ${{ secrets.DEPLOY_USER }}
           key: ${{ secrets.DEPLOY_SSH_KEY }}
           passphrase: ${{ secrets.DEPLOY_PASSPHRASE }}
-          # fingerprint: ${{ secrets.DEPLOY_FINGERPRINT }}
+          fingerprint: ${{ secrets.DEPLOY_FINGERPRINT }}
           protocol: tcp6
-          source: docker-compose.yml
+          source: "docker-compose.yml"
           target: ${{ env.DEPLOY_PATH }}
-          overwrite: true
 
       - name: Pull images and restart services
         uses: appleboy/ssh-action@v1.0.3
@@ -110,7 +109,7 @@ jobs:
           username: ${{ secrets.DEPLOY_USER }}
           key: ${{ secrets.DEPLOY_SSH_KEY }}
           passphrase: ${{ secrets.DEPLOY_PASSPHRASE }}
-          # fingerprint: ${{ secrets.DEPLOY_FINGERPRINT }}
+          fingerprint: ${{ secrets.DEPLOY_FINGERPRINT }}
           script: |
             cd ${{ env.DEPLOY_PATH }}
             echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
