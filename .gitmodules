@@ -1,6 +1,3 @@
-[submodule "deps/altinn-din"]
-	path = deps/altinn-din
-	url = https://github.com/Altinn/altinn-din
 [submodule "containers/frontend"]
 	path = containers/frontend
 	url = https://github.com/ProjectOAWA/frontend.git
