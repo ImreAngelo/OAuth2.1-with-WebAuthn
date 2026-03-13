@@ -1,7 +1,7 @@
 services:
   authorization: # Auth server
     build:
-      context: ./src/auth-server
+      context: ./containers/authorization-server
     expose:
       - 3000 
     networks:
@@ -18,8 +18,8 @@ services:
     image: mariadb:12
     # attach: false # Hide logs
     volumes:
-      - ./src/database/init:/docker-entrypoint-initdb.d
-      - ./src/database/migrations:/migrations
+      - ./containers/database/init:/docker-entrypoint-initdb.d
+      - ./containers/database/migrations:/migrations
       - db_data:/var/lib/mysql
     environment:
       MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
@@ -63,7 +63,7 @@ services:
       - 443:443/tcp
       - 443:443/udp
     volumes:
-      - ./src/nginx/src/conf.d:/etc/nginx/conf.d
+      - ./containers/nginx/containers/conf.d:/etc/nginx/conf.d
     networks:
       - secure
 volumes:
