@@ -15,7 +15,7 @@ dev:
 	pnpm run dev
 
 docker-up:
-	docker compose -f '../../docker-compose.yml' up -d --build 'authorization'
+	docker compose -f '../docker-compose.yml' up -d --build 'authorization'
 
 
 #########

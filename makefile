@@ -17,7 +17,7 @@ $(SERVICES):
 	$(MAKE) -C src/$@
 
 dev:
-	make dev -C ./src/auth-server
+	make dev -C ./containers
 
 
 ##########
@@ -29,9 +29,9 @@ client:
 		echo "Creating virtual environment..."; \
 		python3 -m venv .venv; \
 		echo "Installing dependencies from pyproject.toml..."; \
-		make bootstrap -C ./src/client; \
+		make bootstrap -C ./clients/python; \
 	else \
-		make update -C ./src/client; \
+		make update -C ./clients/python; \
 	fi
 	. .venv/bin/activate && python3 -m oauth_client
 	
@@ -41,7 +41,7 @@ client:
 #########
 
 install:
-	make install -C ./src/auth-server
+	make install -C ./containers
 
 test:
-	make test -C ./src/auth-server
+	make test -C ./containers
