@@ -78,15 +78,15 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # - name: Rename prod compose file for upload
-      #   run: cp docker-compose.prod.yml docker-compose.yml
+      - name: Rename prod compose file for upload
+        run: cp docker-compose.prod.yml docker-compose.yml
 
       # Support IPv6 on GitHub via Cloudflare WARP
       - name: Set up WARP
         uses: fscarmen/warp-on-actions@v1.1
         with:
           stack: dual
-      - name: Testing IPv6
+      - name: Test IPv6 connection
         run: |
           curl -m 9 --ipv6 --verbose https://google.com
 
@@ -101,7 +101,6 @@ jobs:
           protocol: tcp6
           source: "docker-compose.prod.yml"
           target: /home/${{ secrets.DEPLOY_USER }}
-          # target: ${{ env.DEPLOY_PATH }}
 
       - name: Pull images and restart services
         uses: appleboy/ssh-action@v1.0.3
@@ -110,9 +109,9 @@ jobs:
           username: ${{ secrets.DEPLOY_USER }}
           key: ${{ secrets.DEPLOY_SSH_KEY }}
           passphrase: ${{ secrets.DEPLOY_PASSPHRASE }}
-          fingerprint: ${{ secrets.DEPLOY_FINGERPRINT }}
+          # fingerprint: ${{ secrets.DEPLOY_FINGERPRINT }}
           script: |
-            cd ${{ env.DEPLOY_PATH }}
+            cd /home/${{ secrets.DEPLOY_USER }}
             echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
             docker compose pull
             docker compose up -d --remove-orphans
