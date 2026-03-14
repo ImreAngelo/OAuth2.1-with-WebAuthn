@@ -1,4 +1,49 @@
 services:
+  authorization:
+    image: ${IMAGE_PREFIX}/auth-server:latest
+    restart: unless-stopped
+    expose:
+      - 3000
+    networks:
+      - secure
+      - database
+    environment:
+      DB_USER: auth
+      DB_PASS: ${DB_AUTH_PASSWORD}
+      OAUTH_ENDPOINT: /authorize
+      HOST_DOMAIN: ${DOMAIN}
+  database:
+    image: mariadb:12
+    restart: unless-stopped
+    attach: false
+    volumes:
+      - db_data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
+      AUTH_PASSWORD: ${DB_AUTH_PASSWORD}
+    networks:
+      - database
+  vault:
+    image: hashicorp/vault:latest
+    container_name: vault
+    restart: unless-stopped
+    cap_add:
+      - IPC_LOCK
+    volumes:
+      - vault_data:/vault/data
+    environment:
+      VAULT_ADDR: "http://localhost:8200"
+      VAULT_UI: "true"
+    expose:
+      - 8200
+    networks:
+      - secure
+    healthcheck:
+      test: ["CMD", "vault", "status"]
+      interval: 10s
+      timeout: 10s
+      retries: 5
+      start_period: 3s
   nginx:
     image: ${IMAGE_PREFIX}/nginx-proxy:latest
     container_name: nginx
@@ -7,8 +52,15 @@ services:
       - "80:80"
       - "443:443/tcp"
       - "443:443/udp"
+    environment:
+      DOMAIN: ${DOMAIN}
     networks:
       - secure
 
+volumes:
+  db_data:
+  vault_data:
+
 networks:
+  database:
   secure:

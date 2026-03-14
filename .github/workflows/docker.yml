@@ -134,6 +134,7 @@ jobs:
           protocol: tcp6
           script: |
             export IMAGE_PREFIX=${{ env.IMAGE_PREFIX }}
+            export DOMAIN=${{ env.HOST_DOMAIN }}
             cd /home/${{ secrets.DEPLOY_USER }}
             echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
             docker compose pull
