@@ -97,7 +97,7 @@ jobs:
           username: ${{ secrets.DEPLOY_USER }}
           key: ${{ secrets.DEPLOY_SSH_KEY }}
           passphrase: ${{ secrets.DEPLOY_PASSPHRASE }}
-          fingerprint: ${{ secrets.DEPLOY_FINGERPRINT }}
+          # fingerprint: ${{ secrets.DEPLOY_FINGERPRINT }}
           protocol: tcp6
           source: "docker-compose.prod.yml"
           target: /home/${{ secrets.DEPLOY_USER }}
