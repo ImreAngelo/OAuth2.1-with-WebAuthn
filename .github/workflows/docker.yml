@@ -97,10 +97,11 @@ jobs:
           username: ${{ secrets.DEPLOY_USER }}
           key: ${{ secrets.DEPLOY_SSH_KEY }}
           passphrase: ${{ secrets.DEPLOY_PASSPHRASE }}
-          fingerprint: ${{ secrets.DEPLOY_FINGERPRINT }}
+          # fingerprint: ${{ secrets.DEPLOY_FINGERPRINT }}
           protocol: tcp6
           source: "docker-compose.prod.yml"
-          target: ${{ env.DEPLOY_PATH }}
+          target: /home/${{ secrets.DEPLOY_USER }}
+          # target: ${{ env.DEPLOY_PATH }}
 
       - name: Pull images and restart services
         uses: appleboy/ssh-action@v1.0.3
