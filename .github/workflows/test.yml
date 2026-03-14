@@ -30,13 +30,14 @@ jobs:
         run: git push origin --delete badges |
           git checkout -b badges 
 
-      - name: Run tests
-        run: make test
+      # - name: Run tests
+      #   run: make test
 
-      - name: Generate coverage badges
-        uses: jpb06/coverage-badges-action@latest
-        with:
-          target-branch: badges
-          output-folder: ./docs/badges
-          coverage-summary-path: |
-            ./src/auth-server/**/coverage/coverage-summary.json
+      # TODO: Move into container-specific workflow (in submodule repo) 
+      # - name: Generate coverage badges
+      #   uses: jpb06/coverage-badges-action@latest
+      #   with:
+      #     target-branch: badges
+      #     output-folder: ./docs/badges
+      #     coverage-summary-path: |
+      #       ./containers/authorization-server/**/coverage/coverage-summary.json

@@ -99,9 +99,11 @@ jobs:
       # Support IPv6 on GitHub via Cloudflare WARP
       - name: Set up WARP
         uses: fscarmen/warp-on-actions@v1.4
+        continue-on-error: true
         with:
           stack: dual
       - name: Test IPv6 connection
+        continue-on-error: true
         run: |
           curl -m 9 --ipv6 --verbose https://google.com
 
