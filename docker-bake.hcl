@@ -6,12 +6,6 @@ group "default" {
 	targets = ["nginx-app"]
 }
 
-target "nginx-base" {
-	context    = "./containers/nginx"
-	dockerfile = "Dockerfile"
-	tags       = ["nginx-base:local"]
-}
-
 target "frontend-base" {
 	context    = "./containers/frontend"
 	dockerfile = "Dockerfile"
@@ -19,17 +13,16 @@ target "frontend-base" {
 }
 
 target "nginx-app" {
-	context    = "."
-	dockerfile = "Dockerfile.nginx"
+	context    = "./containers/nginx"
+	dockerfile = "Dockerfile"
 	tags       = ["nginx-proxy:latest"]
 	contexts = {
-		nginx-base		= "target:nginx-base"    # resolves the FROM nginx-base
-		frontend-base	= "target:frontend-base" # resolves the FROM frontend-base
+		frontend-base	= "target:frontend-base"
 	}
 	depends_on = ["nginx-base", "frontend-base"]
 }
 
-# CI target — inherits nginx-app but tags and caches against the registry
+# CI target - inherits nginx-app but tags and caches against the registry
 target "nginx-app-push" {
 	inherits   = ["nginx-app"]
 	tags       = ["${IMAGE_PREFIX}/nginx-proxy:latest"]
