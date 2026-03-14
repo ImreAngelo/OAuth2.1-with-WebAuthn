@@ -47,7 +47,7 @@ jobs:
       # Backend is built and pushed to ghcr.io as user/auth-server
       - name: Extract metadata for auth-server
         id: meta-auth
-        uses: docker/metadata-action@v5
+        uses: docker/metadata-action@v6
         with:
           images: ${{ env.IMAGE_PREFIX }}/auth-server
           tags: |
@@ -59,7 +59,7 @@ jobs:
             type=raw,value=latest,enable={{is_default_branch}}
 
       - name: Build and push auth-server
-        uses: docker/build-push-action@v5
+        uses: docker/build-push-action@v7
         with:
           context: ./containers/authorization-server
           push: true
