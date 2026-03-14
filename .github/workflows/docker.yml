@@ -89,6 +89,10 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v6
 
+      - name: Lowercase image prefix
+        run: |
+          echo "IMAGE_PREFIX=ghcr.io/$(echo '${{ github.repository_owner }}' | tr '[:upper:]' '[:lower:]')" >> $GITHUB_ENV
+
       - name: Rename prod compose file for upload
         run: cp docker-compose.prod.yml docker-compose.yml
 
@@ -123,6 +127,7 @@ jobs:
           # fingerprint: ${{ secrets.DEPLOY_FINGERPRINT }}
           protocol: tcp6
           script: |
+            export IMAGE_PREFIX=${{ env.IMAGE_PREFIX }}
             cd /home/${{ secrets.DEPLOY_USER }}
             echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
             docker compose pull
