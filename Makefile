@@ -22,7 +22,7 @@ nginx: build-nginx
 	docker compose -f 'docker-compose.yml' up -d --build 'vault'
 
 docker-up:
-	docker compose -f 'docker-compose.yml' up -d
+	docker compose -f 'docker-compose.yml' up -d --build
 
 # TODO: Non-docker devmode with hot reload etc
 # dev:

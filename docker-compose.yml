@@ -12,7 +12,7 @@ services:
     environment:
       DB_USER: auth
       DB_PASS: ${DB_AUTH_PASSWORD}
-      OAUTH_ENDPOINT: /login
+      OAUTH_ENDPOINT: /authorize
       HOST_DOMAIN: localhost
   database:
     image: mariadb:12

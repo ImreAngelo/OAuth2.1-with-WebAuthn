@@ -119,6 +119,9 @@ jobs:
           source: "docker-compose.yml"
           target: /home/${{ secrets.DEPLOY_USER }}
 
+      # To use on IPv6-only server, install Cloudflare WARP and run in proxy mode
+      # Configure /etc/docker/daemon.json to use the warp proxy
+      # https://pkg.cloudflareclient.com/
       - name: Pull images and restart services
         uses: appleboy/ssh-action@v1
         with:
