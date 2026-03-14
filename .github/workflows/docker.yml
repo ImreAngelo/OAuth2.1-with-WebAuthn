@@ -66,8 +66,13 @@ jobs:
       #     cache-to: type=registry,ref=${{ env.IMAGE_PREFIX }}/auth-server:cache,mode=max
 
       # ── Reverse Proxy + Nginx ──────────────────────────────────────────────
-      # TODO: Build using docker-bake.hcl
-      
+
+      - name: Build and push nginx-proxy
+        run: docker buildx bake nginx-app-push --push
+        env:
+          IMAGE_PREFIX: ${{ env.IMAGE_PREFIX }}
+
+
   deploy:
     name: Deploy to Server (IPv6)
     runs-on: ubuntu-latest
