@@ -1,6 +1,7 @@
 services:
   authorization:
     image: ${IMAGE_PREFIX}/auth-server:latest
+    container_name: auth
     restart: unless-stopped
     expose:
       - 3000
@@ -14,6 +15,7 @@ services:
       HOST_DOMAIN: ${DOMAIN}
   database:
     image: mariadb:12
+    container_name: database
     restart: unless-stopped
     attach: false
     volumes:
