@@ -44,33 +44,34 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
 
       # ── Authorization Server ──────────────────────────────────────────────
-      # Backend
-      # - name: Extract metadata for auth-server
-      #   id: meta-auth
-      #   uses: docker/metadata-action@v5
-      #   with:
-      #     images: ${{ env.IMAGE_PREFIX }}/auth-server
-      #     tags: |
-      #       # Tag with the git SHA for traceability
-      #       type=sha,prefix=sha-
-      #       # Tag branch name
-      #       type=ref,event=branch
-      #       # Always move "latest" on main branch pushes
-      #       type=raw,value=latest,enable={{is_default_branch}}
+      # Backend is built and pushed to ghcr.io as user/auth-server
+      - name: Extract metadata for auth-server
+        id: meta-auth
+        uses: docker/metadata-action@v5
+        with:
+          images: ${{ env.IMAGE_PREFIX }}/auth-server
+          tags: |
+            # Tag with the git SHA for traceability
+            type=sha,prefix=sha-
+            # Tag branch name
+            type=ref,event=branch
+            # Always move "latest" on main branch pushes
+            type=raw,value=latest,enable={{is_default_branch}}
 
-      # - name: Build and push auth-server
-      #   uses: docker/build-push-action@v5
-      #   with:
-      #     context: ./containers/authorization-server
-      #     push: true
-      #     tags: ${{ steps.meta-auth.outputs.tags }}
-      #     labels: ${{ steps.meta-auth.outputs.labels }}
-      #     # Cache layers between runs using the registry itself
-      #     cache-from: type=registry,ref=${{ env.IMAGE_PREFIX }}/auth-server:cache
-      #     cache-to: type=registry,ref=${{ env.IMAGE_PREFIX }}/auth-server:cache,mode=max
+      - name: Build and push auth-server
+        uses: docker/build-push-action@v5
+        with:
+          context: ./containers/authorization-server
+          push: true
+          tags: ${{ steps.meta-auth.outputs.tags }}
+          labels: ${{ steps.meta-auth.outputs.labels }}
+          # Cache layers between runs using the registry itself
+          cache-from: type=registry,ref=${{ env.IMAGE_PREFIX }}/auth-server:cache
+          cache-to: type=registry,ref=${{ env.IMAGE_PREFIX }}/auth-server:cache,mode=max
 
       # ── Reverse Proxy + Nginx ──────────────────────────────────────────────
-
+      # The frontend is statically built and included in nginx
+      # Consider serving the login page from the backend and caching it in nginx
       - name: Build and push nginx-proxy
         run: docker buildx bake nginx-app-push --push
         env:
