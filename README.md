@@ -25,8 +25,6 @@
     <img alt="License" src="https://img.shields.io/github/license/ImreAngelo/OAuth2.1-with-WebAuthn">
 </p>
 
-
-
 <br/>
 
 <picture>
@@ -53,33 +51,34 @@
 <details>
   <summary>Table of Contents</summary>
   <ol>
-    <li>
+    <!-- <li>
       <a href="#about-the-project">About The Project</a>
       <ul>
         <li><a href="#built-with">Built With</a></li>
       </ul>
-    </li>
+    </li> -->
     <li>
       <a href="#getting-started">Getting Started</a>
       <ul>
-        <li><a href="#prerequisites">Prerequisites</a></li>
+        <!-- <li><a href="#prerequisites">Prerequisites</a></li> -->
         <li><a href="#installation">Installation</a></li>
       </ul>
     </li>
-    <li><a href="#usage">Usage</a></li>
+    <li><a href="#oauth">OAuth 2.1 Protocol</a></li>
+    <li><a href="#webauthn">WebAuthn</a></li>
+    <li><a href="#key-rotation">Automatic Key Rotation</a></li>
+    <!-- <li><a href="#acknowledgments">Acknowledgments</a></li> -->
     <li><a href="#roadmap">Roadmap</a></li>
-    <li><a href="#contributing">Contributing</a></li>
-    <li><a href="#license">License</a></li>
-    <li><a href="#contact">Contact</a></li>
-    <li><a href="#acknowledgments">Acknowledgments</a></li>
+    <li><a href="#references">References</a></li>
   </ol>
 </details>
 
-## Project Structure
+
+<!-- Structure and Setup -->
+<h2 id="getting-started">Getting Started</h2>
 The project is set up as a mono-repo with services in the `/src` folder. The server-side services are built as Docker containers and run with Docker Compose, while the client is a simple python program running in the terminal.
 
-
-### Configure Vault
+<h3 id="installation">Configure Vault</h3>
 For the project to work out of the box, vault must be configured with the correct key stores. This can be done automatically with the command: (TODO)
 
 ```shell
@@ -92,7 +91,7 @@ make x
 > For instance, `make vault` will build and restart the vault container.
 
 
-## OAuth 2.1 Protocol
+<h2 id="oauth">OAuth 2.1 Protocol</h2>
 Defined in an active RFC draft[^1], OAuth 2.1 aims to simplify and unifi the many protocols part of the previous OAuth 2.0 standard (various requests for comment, including RFC6749[^2])
 
 <picture>
@@ -109,24 +108,9 @@ Defined in an active RFC draft[^1], OAuth 2.1 aims to simplify and unifi the man
   <img width="100%" src="./docs/diagrams/oauth-flow-light.svg" />
 </picture>
 
-## Automatic Key Rotation
-Each row in the database that contains confidential information has a *data encryption key* (DEK) that is used to encrypt these fields. 
-The DEK is encrypted by a *master key* which is managed by the *key management system* (KMS). In this case, [HashiCorp Vault](https://www.hashicorp.com/en/products/vault) is used as the KMS.
-Every 30 days the master is replaced by a new unique key, and every DEK is re-wrapped using the new master key. 
-This approach scales effectively, as every key-rotation only requires decrypting and encrypting the DEK's instead of the entire database.
 
-TODO: Image of database schema in DBeaver
-
-### Threat Model
-Assuming a *maximally powerful adversary* with full access to the database (e.g., in the event the database is exfiltrated and analyzed using a future quantum computer), this scheme provides the following security properties:
-- **Row-Isolation:** Each row is encrypted using a distinct DEK, ensuring that compromise of a single DEK only exposes that specific row.
-- **Post-Compromise Security:** Master keys are rotated periodically. Even if an attacker eventually recovers a historical master key, data added to the database after the rotation remains protected. 
-<!-- Recovering the master key will likely take much longer than the key-rotation time, so new data added to the DB that was not part of the original leak is still safe even if the attacker recovers the original master key.  -->
-
-> [!IMPORTANT]
-> The project uses AES-128 DEKs and AES-256 master keys by default. Breaking these encryptions are considered unfeasible, the data is likely safe even if the database is leaked. 
-
-## WebAuthn
+<!-- WebAuthn -->
+<h2 id="webauthn">WebAuthn</h2>
 *explanation*
 
 > [!TIP]
@@ -134,12 +118,35 @@ Assuming a *maximally powerful adversary* with full access to the database (e.g.
 >
 > This reduces the initial page load by a single round-trip, but means we cannot easily cache the site and the initial response should include a `Cache-Control: no-cache` header to prevent storing stale options.
 
-## TODO
-- [ ] Use docker secrets instead of environment
-- [ ] #10
-- [ ] https://github.com/ImreAngelo/OAuth2.1-with-WebAuthn/issues/11
-- [ ] https://github.com/ImreAngelo/OAuth2.1-with-WebAuthn/issues/9
 
-## References
+<!-- Key Rotation -->
+<h2 id="key-rotation">Automatic Key Rotation</h2>
+Each row in the database that contains confidential information has a *data encryption key* (DEK) that is used to encrypt these fields. 
+The DEK is encrypted by a *master key* which is managed by the *key management system* (KMS). In this case, [HashiCorp Vault](https://www.hashicorp.com/en/products/vault) is used as the KMS.
+Every 30 days the master is replaced by a new unique key, and every DEK is re-wrapped using the new master key. 
+This approach scales effectively, as every key-rotation only requires decrypting and encrypting the DEK's instead of the entire database.
+
+<!-- TODO: Image of database schema in DBeaver -->
+<picture>
+  <img width="100%" src="./docs/img/db-schema.png" />
+</picture>
+
+<h3 id="threat-model">Threat Model</h3>
+Assuming a *maximally powerful adversary* with full access to the database (e.g., in the event the database is exfiltrated and analyzed using a future quantum computer), this scheme provides the following security properties:
+- **Row-Isolation:** Each row is encrypted using a distinct DEK, ensuring that compromise of a single DEK only exposes that specific row.
+- **Post-Compromise Security:** Master keys are rotated periodically. Even if an attacker eventually recovers a historical master key, data added to the database after the rotation remains protected.
+
+> [!IMPORTANT]
+> The project uses AES-128 DEKs and AES-256 master keys by default. Breaking these encryptions are considered unfeasible, the data is likely safe even if the database is leaked. 
+
+
+<!-- Roadmap -->
+<h2 id="roadmap">Roadmap</h2>
+- [ ] Use docker secrets instead of environment
+- [ ] Move everything to microservices in separate repos instead of monorepo
+
+
+<!-- References -->
+<h2 id="references">References</h2>
 [^1]: [The OAuth 2.1 Authorization Framework](https://datatracker.ietf.org/doc/html/draft-ietf-oauth-v2-1-13)
 [^2]: [RFC6749](https://datatracker.ietf.org/doc/html/rfc6749)

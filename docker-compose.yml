@@ -16,7 +16,6 @@ services:
       HOST_DOMAIN: localhost
   database:
     image: mariadb:12
-    # attach: false # Hide logs
     volumes:
       - ./containers/database/init:/docker-entrypoint-initdb.d
       - ./containers/database/migrations:/migrations
@@ -34,9 +33,9 @@ services:
     cap_add:
       - IPC_LOCK
     volumes:
-      - vault_data:/vault/data
-    #   - ./services/vault/config:/vault/config
-    #   - ./services/vault/scripts/start.sh:/usr/bin/start.sh
+      - vault_data_new:/vault/data
+    #   - ./containers/vault/config:/vault/config
+    #   - ./containers/vault/scripts/start.sh:/usr/bin/start.sh
     # entrypoint: ["/usr/bin/start.sh", "/vault/config/vault.hcl"]
     environment:
       HTTPS_PROXY: "https://vault.localhost"
@@ -44,7 +43,7 @@ services:
       VAULT_ADDR: "http://localhost:8200"
       VAULT_UI: "true"
     # env_file:
-    #   - ./services/vault/.env
+    #   - ./containers/vault/.env
     expose:
       - 8200
     networks:
@@ -68,7 +67,7 @@ services:
       - DOMAIN=localhost
 volumes:
   db_data:
-  vault_data:
+  vault_data_new:
 networks:
   database:
   secure:

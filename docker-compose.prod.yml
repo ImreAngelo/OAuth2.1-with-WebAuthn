@@ -34,7 +34,7 @@ services:
     volumes:
       - vault_data:/vault/data
     environment:
-      VAULT_ADDR: "http://localhost:8200"
+      VAULT_ADDR: "http://${DOMAIN}:8200"
       VAULT_UI: "true"
     expose:
       - 8200
