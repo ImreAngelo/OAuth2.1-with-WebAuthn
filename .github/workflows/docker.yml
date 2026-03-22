@@ -117,7 +117,7 @@ jobs:
           passphrase: ${{ secrets.DEPLOY_PASSPHRASE }}
           # fingerprint: ${{ secrets.DEPLOY_FINGERPRINT }}
           protocol: tcp6
-          source: "docker-compose.yml"
+          source: "docker-compose.yml,containers/vault/vault.hcl"
           target: /home/${{ secrets.DEPLOY_USER }}
 
       # To use on IPv6-only server, install Cloudflare WARP and run in proxy mode
