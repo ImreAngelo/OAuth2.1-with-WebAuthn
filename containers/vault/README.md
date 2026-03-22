@@ -33,3 +33,26 @@ vault operator unseal
 
 ## Authenticating services
 The services need users as well.
+
+
+
+## Public-Key Infrastructure
+
+1. Enable PKI in secrets engines
+
+2. Choose one of the options:
+    - In local development, generate a root CA
+    - In production, generate intermediate CSR for signing and see <a href="#csr">production mode<a href>
+    - Or import a CA if you have one
+
+3. Set type to `internal` to make sure the private key never leaves vault
+
+4. Give the certificate a name, for example "something"
+
+5. Open key params and set key type to `ec` and at least 256 bits!
+
+6. (Optional) Configure SAN and additional fields
+
+
+
+<h2 id="csr">Production mode (TODO)</h2>
