@@ -32,15 +32,14 @@ services:
     container_name: vault
     cap_add:
       - IPC_LOCK
+    command: server
     volumes:
-      - vault_data_new:/vault/data
-    #   - ./containers/vault/config:/vault/config
+      - vault_data:/vault/file
+      - ./containers/vault/vault.hcl:/vault/config/vault.hcl
     #   - ./containers/vault/scripts/start.sh:/usr/bin/start.sh
     # entrypoint: ["/usr/bin/start.sh", "/vault/config/vault.hcl"]
     environment:
-      HTTPS_PROXY: "https://vault.localhost"
-      HTTP_PROXY: "http://vault.localhost"
-      VAULT_ADDR: "http://localhost:8200"
+      VAULT_ADDR: "http://0.0.0.0:8200"
       VAULT_UI: "true"
     # env_file:
     #   - ./containers/vault/.env
@@ -67,7 +66,7 @@ services:
       - DOMAIN=localhost
 volumes:
   db_data:
-  vault_data_new:
+  vault_data:
 networks:
   database:
   secure:
