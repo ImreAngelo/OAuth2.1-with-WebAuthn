@@ -19,7 +19,7 @@ $(SERVICES):
 build-nginx:
 	docker buildx bake
 nginx: build-nginx 
-	docker compose -f 'docker-compose.yml' up -d --build 'vault'
+	docker compose -f 'docker-compose.yml' up -d --build 'nginx'
 
 docker-up:
 	docker compose -f 'docker-compose.yml' up -d --build

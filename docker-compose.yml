@@ -62,10 +62,10 @@ services:
       - 80:80
       - 443:443/tcp
       - 443:443/udp
-    volumes:
-      - ./containers/nginx/src/conf.d:/etc/nginx/conf.d
     networks:
       - secure
+    environment:
+      - DOMAIN=localhost
 volumes:
   db_data:
   vault_data:
