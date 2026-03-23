@@ -26,15 +26,16 @@ services:
     networks:
       - database
   vault:
-    image: hashicorp/vault:latest
+    image: ${IMAGE_PREFIX}/vault:latest
     container_name: vault
     restart: unless-stopped
     cap_add:
       - IPC_LOCK
+    command: server
     volumes:
-      - vault_data:/vault/data
+      - vault_data:/vault/file
     environment:
-      VAULT_ADDR: "http://${DOMAIN}:8200"
+      VAULT_ADDR: "http://0.0.0.0:8200"
       VAULT_UI: "true"
     expose:
       - 8200

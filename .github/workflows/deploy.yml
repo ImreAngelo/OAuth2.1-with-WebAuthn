@@ -69,6 +69,29 @@ jobs:
           cache-from: type=registry,ref=${{ env.IMAGE_PREFIX }}/auth-server:cache
           cache-to: type=registry,ref=${{ env.IMAGE_PREFIX }}/auth-server:cache,mode=max
 
+      # ── Vault ─────────────────────────────────────────────────────────────
+      # Very close to the base hashicorp/vault container, but with some extra
+      # policies and setup script.
+      - name: Extract metadata for vault
+        id: meta-vault
+        uses: docker/metadata-action@v6
+        with:
+          images: ${{ env.IMAGE_PREFIX }}/vault
+          tags: |
+            type=sha,prefix=sha-
+            type=ref,event=branch
+            type=raw,value=latest,enable={{is_default_branch}}
+
+      - name: Build and push vault
+        uses: docker/build-push-action@v7
+        with:
+          context: ./containers/vault
+          push: true
+          tags: ${{ steps.meta-vault.outputs.tags }}
+          labels: ${{ steps.meta-vault.outputs.labels }}
+          cache-from: type=registry,ref=${{ env.IMAGE_PREFIX }}/vault:cache
+          cache-to: type=registry,ref=${{ env.IMAGE_PREFIX }}/vault:cache,mode=max
+
       # ── Reverse Proxy + Nginx ──────────────────────────────────────────────
       # The frontend is statically built and included in nginx
       # Consider serving the login page from the backend and caching it in nginx
@@ -117,7 +140,7 @@ jobs:
           passphrase: ${{ secrets.DEPLOY_PASSPHRASE }}
           # fingerprint: ${{ secrets.DEPLOY_FINGERPRINT }}
           protocol: tcp6
-          source: "docker-compose.yml,containers/vault/vault.hcl"
+          source: "docker-compose.yml"
           target: /home/${{ secrets.DEPLOY_USER }}
 
       # To use on IPv6-only server, install Cloudflare WARP and run in proxy mode
