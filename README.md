@@ -18,7 +18,7 @@
     OAuth 2.1 is the de-facto standard for allowing third-parties to securely access API resources. WebAuthn allows authentication with hardware keys embedded in laptops and phones etc., solving the problem of users using weak or previously used passwords. Putting these together represents the state-of-the-art for authentication and third-party API authorization. This repository contains a complete OAuth 2.1 implementation including a "third-party" client, resource server and authorization server using WebAuthn used for authenticating users. 
 </p>
 <p align="center">
-    <img alt="Build Status" src="https://github.com/ImreAngelo/OAuth2.1-with-WebAuthn/actions/workflows/docker.yml/badge.svg">
+    <img alt="Build Status" src="https://github.com/ImreAngelo/OAuth2.1-with-WebAuthn/actions/workflows/deploy.yml/badge.svg">
     <img alt="Coverage" src="https://github.com/ImreAngelo/OAuth2.1-with-WebAuthn/blob/badges/docs/badges/backend/coverage-total.svg">
     <img alt="License" src="https://img.shields.io/github/license/ImreAngelo/OAuth2.1-with-WebAuthn">
 </p>
