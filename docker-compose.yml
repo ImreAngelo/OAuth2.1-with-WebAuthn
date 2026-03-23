@@ -28,21 +28,17 @@ services:
     networks:
       - database
   vault:
-    image: hashicorp/vault:latest
+    build:
+      context: ./containers/vault
     container_name: vault
     cap_add:
       - IPC_LOCK
     command: server
     volumes:
       - vault_data:/vault/file
-      - ./containers/vault/vault.hcl:/vault/config/vault.hcl
-    #   - ./containers/vault/scripts/start.sh:/usr/bin/start.sh
-    # entrypoint: ["/usr/bin/start.sh", "/vault/config/vault.hcl"]
     environment:
       VAULT_ADDR: "http://0.0.0.0:8200"
       VAULT_UI: "true"
-    # env_file:
-    #   - ./containers/vault/.env
     expose:
       - 8200
     networks:
