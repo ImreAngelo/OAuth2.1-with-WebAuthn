@@ -22,13 +22,13 @@ jobs:
         with:
           version: 10
       
-      - name: Install dependencies
-        run: make install
+      # - name: Install dependencies
+      #   run: make install
 
-      - name: Reset 'badges' branch
-        continue-on-error: true
-        run: git push origin --delete badges |
-          git checkout -b badges 
+      # - name: Reset 'badges' branch
+      #   continue-on-error: true
+      #   run: git push origin --delete badges |
+      #     git checkout -b badges 
 
       # - name: Run tests
       #   run: make test
