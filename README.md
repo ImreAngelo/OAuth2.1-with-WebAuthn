@@ -73,10 +73,40 @@
 
 
 <!-- Structure and setup -->
-## Getting Started
+<h2>Getting Started</h2>
 The server consists of microservices, located in their own repositories and submoduled into [the containers directory](containers). 
 For demonstration purposes, docker compose is used for container orchestration. GitHub workflows are set up for CI/CD.
 A single "third party" client is included, built in python. (TODO: Add documentation for using this client.)
+
+### Environment Variables
+
+Create a `.env` file in the project root before running Docker Compose:
+
+```env
+DB_ROOT_PASSWORD=changeme
+DB_AUTH_PASSWORD=changeme
+DOMAIN=localhost
+```
+
+| Variable | Required | Description |
+|---|---|---|
+| `DB_ROOT_PASSWORD` | Yes | MariaDB root password |
+| `DB_AUTH_PASSWORD` | Yes | Password for the `auth` DB user (shared between MariaDB and the auth server) |
+| `DOMAIN` | Yes | Your domain name, e.g. `example.com`. Use `localhost` for development. |
+| `IMAGE_PREFIX` | Prod only | Container registry prefix, e.g. `ghcr.io/youruser` (only used in `docker-compose.prod.yml`) |
+
+The auth server also reads these variables (injected automatically via Docker Compose):
+
+| Variable | Default | Description |
+|---|---|---|
+| `DB_HOST` | `database` | Database hostname |
+| `DB_PORT` | `3306` | Database port |
+| `DB_NAME` | `authn` | Database name |
+| `DB_USER` | `auth` | Database username |
+| `DB_PASS` | — | Database password (set from `DB_AUTH_PASSWORD`) |
+| `DOMAIN` | — | Cookie domain for OAuth sessions |
+| `OAUTH_ENDPOINT` | `/authorize` | OAuth endpoint path |
+| `PORT` | `3000` | Port the auth server listens on |
 
 > [!TIP]
 > You can reload a single Docker container by running `make service` where service is the name of the server. 
@@ -89,7 +119,7 @@ Authorization is managed centrally by hashicorp vault.
 > Follow the instructions [here](containers/vault/README.md) to get the vault configured properly!
 
 
-## OAuth 2.1 Protocol
+<h2>OAuth 2.1 Protocol</h2>
 Defined in an active RFC draft[^1], OAuth 2.1 aims to simplify and unifi the many protocols part of the 
 previous OAuth 2.0 standard (defined throughout various requests for comment, including RFC6749[^2])
 
@@ -109,7 +139,7 @@ previous OAuth 2.0 standard (defined throughout various requests for comment, in
 
 
 <!-- WebAuthn -->
-## WebAuthn
+<h2>WebAuthn</h2>
 *TODO: explanation*
 
 <br/>
@@ -121,7 +151,7 @@ previous OAuth 2.0 standard (defined throughout various requests for comment, in
 
 
 <!-- Key Rotation -->
-## Automatic Key Rotation
+<h2>Automatic Key Rotation</h2>
 Each row in the database that contains confidential information has a *data encryption key* (DEK) that is used to encrypt these fields. 
 The DEK is encrypted by a *master key* which is managed by the *key management system* (KMS). In this case, [HashiCorp Vault](https://www.hashicorp.com/en/products/vault) is used as the KMS.
 Every 30 days the master is replaced by a new unique key, and every DEK is re-wrapped using the new master key. 
@@ -132,7 +162,7 @@ This approach scales effectively, as every key-rotation only requires decrypting
   <img align="center" width="65%" src="./docs/img/db-schema.png" />
 </picture>
 
-### Threat Model
+<h3>Threat Model</h3>
 Assuming a *maximally powerful adversary* with full access to the database (e.g., in the event the database is exfiltrated and analyzed using a future quantum computer), this scheme provides the following security properties:
 - **Row-Isolation:** Each row is encrypted using a distinct DEK, ensuring that compromise of a single DEK only exposes that specific row.
 - **Post-Compromise Security:** Master keys are rotated periodically. Even if an attacker eventually recovers a historical master key, data added to the database after the rotation remains protected.
@@ -143,13 +173,11 @@ Assuming a *maximally powerful adversary* with full access to the database (e.g.
 
 <!-- Roadmap -->
 ## Roadmap
-
 * [ ] Use docker secrets instead of environment
-* [ ] Move everything to microservices in separate repos instead of monorepo
+* [x] Move everything to microservices in separate repos instead of monorepo
 
 
 <!-- References -->
 ## References
-
 * [^1]: [The OAuth 2.1 Authorization Framework](https://datatracker.ietf.org/doc/html/draft-ietf-oauth-v2-1-13)
 * [^2]: [RFC6749](https://datatracker.ietf.org/doc/html/rfc6749)

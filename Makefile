@@ -5,6 +5,13 @@ SERVICES := authorization database vault
 
 all: build-nginx docker-up
 
+####################
+# FIRST TIME SETUP #
+####################
+
+setup:
+	@echo ""
+
 ##########
 # DOCKER #
 ##########
@@ -23,10 +30,6 @@ nginx: build-nginx
 
 docker-up:
 	docker compose -f 'docker-compose.yml' up -d --build
-
-# TODO: Non-docker devmode with hot reload etc
-# dev:
-# 	make dev -C ./containers
 
 
 ###########
