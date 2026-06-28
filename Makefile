@@ -1,6 +1,6 @@
 SERVICES := authorization database vault
 
-.PHONY: all build dev $(SERVICES) client test install
+.PHONY: all build dev $(SERVICES) client test install init
 
 
 all: build-nginx docker-up
@@ -9,7 +9,7 @@ all: build-nginx docker-up
 # FIRST TIME SETUP #
 ####################
 
-setup:
+init:
 	@echo ""
 
 ##########

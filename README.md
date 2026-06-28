@@ -123,19 +123,44 @@ Authorization is managed centrally by hashicorp vault.
 Defined in an active RFC draft[^1], OAuth 2.1 aims to simplify and unifi the many protocols part of the 
 previous OAuth 2.0 standard (defined throughout various requests for comment, including RFC6749[^2])
 
-<picture>
-  <source
-    width="100%"
-    srcset="./docs/diagrams/oauth-flow-dark.svg"
-    media="(prefers-color-scheme: dark)"
-  />
-  <source
-    width="100%"
-    srcset="./docs/diagrams/oauth-flow-light.svg"
-    media="(prefers-color-scheme: light), (prefers-color-scheme: no-preference)"
-  />
-  <img width="100%" src="./docs/diagrams/oauth-flow-light.svg" />
-</picture>
+```mermaid
+sequenceDiagram
+    participant Client
+    participant Browser
+    participant Auth
+
+    Client->>Client: Generate PKCE<br/>verifier + challenge
+    Client->>Browser: Open
+
+    activate Client
+    Note over Client: Start listening on {redirect_uri}
+
+    Browser->>Auth: GET /authorize?response_type=code<br/>client_id={client_id}<br/>redirect_uri={redirect_uri}<br/>code_challenge={code_challenge}<br/>code_challenge_method=S256<br/>state={state}
+
+    activate Auth
+    Note over Auth: Begin OAuth session<br/>(validate client_id + redirect_uri)
+
+    Auth->>Auth: Save request parameters<br/>identified by the session ID
+    Auth-->>Browser: 200 ok, set-cookie: {session ID}
+
+    activate Browser
+    Note over Browser,Auth: User authenticates via selected<br/>method: WebAuthn, password etc.
+    Browser->>Auth: POST /{method}/login/verify
+    deactivate Browser
+
+    Auth->>Auth: Verify authentication and<br/>generate auth code linked to<br/>session ID
+    Auth-->>Browser: 302 redirect {redirect_uri}?code={code}&state={state}
+
+    Browser->>Client: GET {redirect_uri}?code={code}&state={state}
+    Client->>Client: Verify state matches<br/>the value sent earlier
+
+    Client->>Auth: POST /oauth/token<br/>grant_type=authorization_code<br/>code={code}<br/>redirect_uri={redirect_uri}<br/>client_id={client_id}<br/>code_verifier={verifier}
+    deactivate Client
+
+    Auth->>Auth: Verify code_challenge = S256(code_verifier)
+    Auth-->>Client: 200 ok, send {access token} and {refresh token}<br/>(refresh token rotated on each use)
+    deactivate Auth
+```
 
 
 <!-- WebAuthn -->
@@ -179,5 +204,6 @@ Assuming a *maximally powerful adversary* with full access to the database (e.g.
 
 <!-- References -->
 ## References
+
 * [^1]: [The OAuth 2.1 Authorization Framework](https://datatracker.ietf.org/doc/html/draft-ietf-oauth-v2-1-13)
 * [^2]: [RFC6749](https://datatracker.ietf.org/doc/html/rfc6749)
