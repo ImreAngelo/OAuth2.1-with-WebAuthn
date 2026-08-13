@@ -144,12 +144,13 @@ Assuming a *maximally powerful adversary* with full access to the database (e.g.
 <!-- Roadmap -->
 ## Roadmap
 
-* [ ] Use docker secrets instead of environment
-* [ ] Move everything to microservices in separate repos instead of monorepo
-
+<!-- * [ ] Use docker secrets instead of environment -->
+- [x] Migrate to microservices in separate repos instead of monorepo
+- [ ] Make each microservice responsible for its own CI/CD package, root repo deploys to prod
+- [ ] Make OAuth flowchart into mermaid chart
+- [ ] Simplify nginx to just a cache with 
 
 <!-- References -->
 ## References
-
-* [^1]: [The OAuth 2.1 Authorization Framework](https://datatracker.ietf.org/doc/html/draft-ietf-oauth-v2-1-13)
-* [^2]: [RFC6749](https://datatracker.ietf.org/doc/html/rfc6749)
+[^1]: [The OAuth 2.1 Authorization Framework](https://datatracker.ietf.org/doc/html/draft-ietf-oauth-v2-1-13)
+[^2]: [RFC6749](https://datatracker.ietf.org/doc/html/rfc6749)
